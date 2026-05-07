@@ -3,105 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Faturamento Kibon</title>
+    <title>Parceiro Kibon - Cadastro de Faturamento</title>
     <style>
         :root {
             --kibon-red: #e30613;
-            --kibon-blue: #0056a0;
+            --kibon-yellow: #ffcc00;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+            background-color: #fdfdfd;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
         }
 
         .container {
-            max-width: 900px;
-            margin: auto;
+            max-width: 500px;
+            margin: 20px auto;
             background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid #eee;
         }
 
         .header {
+            background-color: var(--kibon-red);
+            color: white;
             text-align: center;
-            border-bottom: 3px solid var(--kibon-red);
-            padding-bottom: 20px;
-            margin-bottom: 25px;
+            padding: 20px;
         }
 
         .logo-kibon {
-            width: 150px;
-            height: auto;
+            width: 120px;
+            margin-bottom: 10px;
         }
 
-        .grid-filtros {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
+        .banner-oferta {
+            background: var(--kibon-yellow);
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+            border-bottom: 3px solid #e306131c;
+        }
+
+        .form-body {
+            padding: 20px;
         }
 
         .input-group {
-            display: flex;
-            flex-direction: column;
+            margin-bottom: 15px;
         }
 
         label {
-            font-weight: bold;
+            display: block;
             margin-bottom: 5px;
-            color: #333;
+            font-weight: bold;
+            color: #444;
         }
 
         input, select {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            outline: none;
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
         }
 
         input:focus {
-            border-color: var(--kibon-blue);
+            border-color: var(--kibon-red);
+            outline: none;
         }
 
-        /* Validação de Erro */
-        .error-input {
-            border: 2px solid var(--kibon-red) !important;
-            background-color: #fff0f0;
-        }
-
-        .error-message {
+        .error-msg {
             color: var(--kibon-red);
-            font-size: 12px;
+            font-size: 0.85em;
             margin-top: 5px;
             display: none;
         }
 
-        .btn-buscar {
-            width: 100%;
-            background-color: var(--kibon-red);
+        .btn-finalizar {
+            background: #28a745;
             color: white;
-            padding: 12px;
             border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-buscar:hover {
-            background-color: #b3050f;
-        }
-
-        .resultados {
-            margin-top: 30px;
+            width: 100%;
             padding: 15px;
-            border-left: 5px solid var(--kibon-blue);
-            background: #eef6ff;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Estilo do Modal de Sucesso/Download */
+        #modalDownload {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 80%;
+        }
+
+        .btn-download {
+            background: var(--kibon-red);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            display: inline-block;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -109,82 +140,84 @@
 
 <div class="container">
     <div class="header">
-        <!-- Substitua pelo link real da imagem da Kibon -->
-        <img src="https://upload.wikimedia.org/wikipedia/pt/d/d2/Logo_Kibon.png" alt="Logo Kibon" class="logo-kibon">
-        <h2>Consulta de Faturamento Comércio</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/pt/d/d2/Logo_Kibon.png" alt="Kibon" class="logo-kibon">
+        <h2>Seja um Parceiro!</h2>
     </div>
 
-    <div class="grid-filtros">
-        <!-- Seleção de Dispositivo -->
+    <div class="banner-oferta">
+        🎁 Ganhos de R$ 500,00 + Freezer Grátis <br>
+        <small>Exclusivo para novos comércios</small>
+    </div>
+
+    <div class="form-body">
         <div class="input-group">
-            <label>Modelo do Celular/Dispositivo:</label>
-            <select id="modeloCelular">
-                <option value="">Selecione o modelo...</option>
-                <option value="iphone">iPhone (Todos)</option>
-                <option value="samsung">Samsung Galaxy (Todos)</option>
-                <option value="motorola">Motorola Moto (Todos)</option>
-                <option value="xiaomi">Xiaomi (Todos)</option>
-                <option value="tablet">Tablet / POS</option>
+            <label>Modelo do seu Celular:</label>
+            <select id="celular">
+                <option value="">Selecione...</option>
+                <option>Samsung Galaxy</option>
+                <option>iPhone / iOS</option>
+                <option>Motorola</option>
+                <option>Xiaomi / Outros</option>
             </select>
         </div>
 
-        <!-- Localização -->
         <div class="input-group">
-            <label>Estado (UF):</label>
-            <input type="text" id="estado" placeholder="Ex: SP, RJ, MG...">
+            <label>Estado:</label>
+            <input type="text" id="estado" placeholder="Ex: São Paulo">
         </div>
 
         <div class="input-group">
-            <label>Cidade:</label>
-            <input type="text" id="cidade" placeholder="Digite a cidade">
+            <label>CPF ou CNPJ do Comércio:</label>
+            <input type="text" id="doc" placeholder="000.000.000-00" onblur="validarDoc()">
+            <div id="erroDoc" class="error-msg">⚠️ Documento inválido ou incompleto.</div>
         </div>
 
-        <!-- Documento com Validação -->
         <div class="input-group">
-            <label>CNPJ ou CPF:</label>
-            <input type="text" id="documento" placeholder="00.000.000/0000-00" oninput="validarDocumento()">
-            <span id="msgErro" class="error-message">Documento inválido. Verifique os números.</span>
+            <label>Renda Mensal Estimada:</label>
+            <select>
+                <option>Até R$ 2.000</option>
+                <option>R$ 2.000 a R$ 5.000</option>
+                <option>Acima de R$ 5.000</option>
+            </select>
         </div>
+
+        <button class="btn-finalizar" onclick="abrirDownload()">CONCLUIR E RESGATAR</button>
     </div>
+</div>
 
-    <button class="btn-buscar" onclick="buscarFaturamento()">PESQUISAR FATURAMENTO</button>
-
-    <div id="resultadoArea" class="resultados" style="display: none;">
-        <strong>Resultado da Busca:</strong>
-        <p id="feedbackTxt"></p>
+<!-- Modal de Download -->
+<div id="modalDownload">
+    <div class="modal-content">
+        <h2 style="color: #28a745;">CADASTRO APROVADO! ✅</h2>
+        <p>Seu bônus de <b>R$ 500,00</b> e o <b>Freezer</b> foram reservados.</p>
+        <p>Para finalizar e ativar sua conta, baixe o aplicativo oficial abaixo:</p>
+        
+        <!-- Link fictício para o APK -->
+        <a href="seu-arquivo.apk" class="btn-download">BAIXAR APK E RESGATAR AGORA</a>
     </div>
 </div>
 
 <script>
-    function validarDocumento() {
-        const docInput = document.getElementById('documento');
-        const msgErro = document.getElementById('msgErro');
-        const valor = docInput.value.replace(/\D/g, ''); // Remove letras e pontos
-
-        // Lógica simples: CPF tem 11 e CNPJ 14. Se fugir disso ao digitar, avisa.
-        if (valor.length > 0 && valor.length !== 11 && valor.length !== 14) {
-            docInput.classList.add('error-input');
-            msgErro.style.display = 'block';
+    function validarDoc() {
+        const doc = document.getElementById('doc');
+        const erro = document.getElementById('erroDoc');
+        // Validação simples de tamanho (mínimo 11 para CPF)
+        if (doc.value.length < 11) {
+            doc.style.borderColor = "#e30613";
+            erro.style.display = "block";
         } else {
-            docInput.classList.remove('error-input');
-            msgErro.style.display = 'none';
+            doc.style.borderColor = "#28a745";
+            erro.style.display = "none";
         }
     }
 
-    function buscarFaturamento() {
-        const doc = document.getElementById('documento').value;
-        const cidade = document.getElementById('cidade').value;
-        const resultadoArea = document.getElementById('resultadoArea');
-        const feedbackTxt = document.getElementById('feedbackTxt');
-
-        if (!doc || document.getElementById('documento').classList.contains('error-input')) {
-            alert("Por favor, insira um CPF ou CNPJ válido antes de buscar.");
+    function abrirDownload() {
+        const doc = document.getElementById('doc').value;
+        if (doc.length < 11) {
+            alert("Por favor, preencha o documento corretamente!");
             return;
         }
-
-        // Simulação de busca
-        resultadoArea.style.display = 'block';
-        feedbackTxt.innerHTML = `Buscando registros para o documento <b>${doc}</b> na cidade de <b>${cidade}</b>... <br>Aguarde o processamento dos dados de faturamento.`;
+        document.getElementById('modalDownload').style.display = 'flex';
     }
 </script>
 
