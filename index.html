@@ -3,93 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Comércio - Sorvetes Kibon</title>
+    <title>Portal de Faturamento Kibon</title>
     <style>
         :root {
-            --kibon-red: #e2001a;
-            --kibon-blue: #005596;
+            --kibon-red: #e30613;
+            --kibon-blue: #0056a0;
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .header { text-align: center; margin-bottom: 25px; }
-        .header img { width: 150px; border-radius: 10px; }
-        h2 { color: var(--kibon-red); text-align: center; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; background-color: #25d366; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        button:hover { background-color: #128c7e; }
-        .footer-link { text-align: center; margin-top: 20px; font-size: 14px; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--kibon-red);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .logo-kibon {
+            width: 150px;
+            height: auto;
+        }
+
+        .grid-filtros {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--kibon-blue);
+        }
+
+        /* Validação de Erro */
+        .error-input {
+            border: 2px solid var(--kibon-red) !important;
+            background-color: #fff0f0;
+        }
+
+        .error-message {
+            color: var(--kibon-red);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .btn-buscar {
+            width: 100%;
+            background-color: var(--kibon-red);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-buscar:hover {
+            background-color: #b3050f;
+        }
+
+        .resultados {
+            margin-top: 30px;
+            padding: 15px;
+            border-left: 5px solid var(--kibon-blue);
+            background: #eef6ff;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <!-- Substitua o link abaixo pela URL da imagem oficial ou do seu repositório -->
-        <img src="https://logodownload.org/wp-content/uploads/2017/05/kibon-logo-1.png" alt="Logo Kibon">
+        <!-- Substitua pelo link real da imagem da Kibon -->
+        <img src="https://upload.wikimedia.org/wikipedia/pt/d/d2/Logo_Kibon.png" alt="Logo Kibon" class="logo-kibon">
+        <h2>Consulta de Faturamento Comércio</h2>
     </div>
 
-    <h2>Cadastro de Parceiro</h2>
-    
-    <form id="cadastroForm">
-        <div class="form-group">
-            <label>Cidade:</label>
-            <input type="text" id="cidade" placeholder="Ex: Osasco" required>
-        </div>
-
-        <div class="form-group">
-            <label>Estado:</label>
-            <select id="estado" required>
-                <option value="">Selecione</option>
-                <option value="SP">São Paulo</option>
-                <option value="RJ">Rio de Janeiro</option>
-                <option value="MG">Minas Gerais</option>
-                <!-- Adicione outros estados conforme necessário -->
+    <div class="grid-filtros">
+        <!-- Seleção de Dispositivo -->
+        <div class="input-group">
+            <label>Modelo do Celular/Dispositivo:</label>
+            <select id="modeloCelular">
+                <option value="">Selecione o modelo...</option>
+                <option value="iphone">iPhone (Todos)</option>
+                <option value="samsung">Samsung Galaxy (Todos)</option>
+                <option value="motorola">Motorola Moto (Todos)</option>
+                <option value="xiaomi">Xiaomi (Todos)</option>
+                <option value="tablet">Tablet / POS</option>
             </select>
         </div>
 
-        <div class="form-group">
-            <label>Renda Mensal Estimada:</label>
-            <input type="text" id="renda" placeholder="R$ 0,00" required>
+        <!-- Localização -->
+        <div class="input-group">
+            <label>Estado (UF):</label>
+            <input type="text" id="estado" placeholder="Ex: SP, RJ, MG...">
         </div>
 
-        <div class="form-group">
-            <label>Faturamento Atual do Comércio:</label>
-            <input type="text" id="faturamento" placeholder="R$ 0,00" required>
+        <div class="input-group">
+            <label>Cidade:</label>
+            <input type="text" id="cidade" placeholder="Digite a cidade">
         </div>
 
-        <button type="button" onclick="enviarWhatsApp()">Finalizar Cadastro e Receber App</button>
-    </form>
+        <!-- Documento com Validação -->
+        <div class="input-group">
+            <label>CNPJ ou CPF:</label>
+            <input type="text" id="documento" placeholder="00.000.000/0000-00" oninput="validarDocumento()">
+            <span id="msgErro" class="error-message">Documento inválido. Verifique os números.</span>
+        </div>
+    </div>
 
-    <div class="footer-link">
-        <p>Ao clicar, você será redirecionado para o suporte via WhatsApp.</p>
+    <button class="btn-buscar" onclick="buscarFaturamento()">PESQUISAR FATURAMENTO</button>
+
+    <div id="resultadoArea" class="resultados" style="display: none;">
+        <strong>Resultado da Busca:</strong>
+        <p id="feedbackTxt"></p>
     </div>
 </div>
 
 <script>
-    function enviarWhatsApp() {
-        // --- CONFIGURAÇÕES ---
-        const fone = "5588981748458"; // COLOQUE SEU WHATSAPP AQUI (DDI + DDD + NUMERO)
-        const urlApp = "SUA_URL_DO_ARQUIVO_AQUI"; // COLOQUE A URL DO SEU APK/APP AQUI
+    function validarDocumento() {
+        const docInput = document.getElementById('documento');
+        const msgErro = document.getElementById('msgErro');
+        const valor = docInput.value.replace(/\D/g, ''); // Remove letras e pontos
 
-        // Captura dos dados
+        // Lógica simples: CPF tem 11 e CNPJ 14. Se fugir disso ao digitar, avisa.
+        if (valor.length > 0 && valor.length !== 11 && valor.length !== 14) {
+            docInput.classList.add('error-input');
+            msgErro.style.display = 'block';
+        } else {
+            docInput.classList.remove('error-input');
+            msgErro.style.display = 'none';
+        }
+    }
+
+    function buscarFaturamento() {
+        const doc = document.getElementById('documento').value;
         const cidade = document.getElementById('cidade').value;
-        const estado = document.getElementById('estado').value;
-        const renda = document.getElementById('renda').value;
-        const faturamento = document.getElementById('faturamento').value;
+        const resultadoArea = document.getElementById('resultadoArea');
+        const feedbackTxt = document.getElementById('feedbackTxt');
 
-        // Montagem da mensagem
-        const mensagem = `Olá! Gostaria de finalizar meu cadastro Kibon:%0A%0A` +
-                         `*Cidade:* ${cidade}%0A` +
-                         `*Estado:* ${estado}%0A` +
-                         `*Renda:* ${renda}%0A` +
-                         `*Faturamento:* ${faturamento}%0A%0A` +
-                         `*Link do App:* ${urlApp}`;
+        if (!doc || document.getElementById('documento').classList.contains('error-input')) {
+            alert("Por favor, insira um CPF ou CNPJ válido antes de buscar.");
+            return;
+        }
 
-        // Redirecionamento
-        const wpLink = `https://api.whatsapp.com/send?phone=${fone}&text=${mensagem}`;
-        window.open(wpLink, '_blank');
+        // Simulação de busca
+        resultadoArea.style.display = 'block';
+        feedbackTxt.innerHTML = `Buscando registros para o documento <b>${doc}</b> na cidade de <b>${cidade}</b>... <br>Aguarde o processamento dos dados de faturamento.`;
     }
 </script>
 
