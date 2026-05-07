@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Comércio - Sorvetes Kibon</title>
+    <style>
+        :root {
+            --kibon-red: #e2001a;
+            --kibon-blue: #005596;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .header { text-align: center; margin-bottom: 25px; }
+        .header img { width: 150px; border-radius: 10px; }
+        h2 { color: var(--kibon-red); text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background-color: #25d366; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background-color: #128c7e; }
+        .footer-link { text-align: center; margin-top: 20px; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <!-- Substitua o link abaixo pela URL da imagem oficial ou do seu repositório -->
+        <img src="https://logodownload.org/wp-content/uploads/2017/05/kibon-logo-1.png" alt="Logo Kibon">
+    </div>
+
+    <h2>Cadastro de Parceiro</h2>
+    
+    <form id="cadastroForm">
+        <div class="form-group">
+            <label>Cidade:</label>
+            <input type="text" id="cidade" placeholder="Ex: Osasco" required>
+        </div>
+
+        <div class="form-group">
+            <label>Estado:</label>
+            <select id="estado" required>
+                <option value="">Selecione</option>
+                <option value="SP">São Paulo</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="MG">Minas Gerais</option>
+                <!-- Adicione outros estados conforme necessário -->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Renda Mensal Estimada:</label>
+            <input type="text" id="renda" placeholder="R$ 0,00" required>
+        </div>
+
+        <div class="form-group">
+            <label>Faturamento Atual do Comércio:</label>
+            <input type="text" id="faturamento" placeholder="R$ 0,00" required>
+        </div>
+
+        <button type="button" onclick="enviarWhatsApp()">Finalizar Cadastro e Receber App</button>
+    </form>
+
+    <div class="footer-link">
+        <p>Ao clicar, você será redirecionado para o suporte via WhatsApp.</p>
+    </div>
+</div>
+
+<script>
+    function enviarWhatsApp() {
+        // --- CONFIGURAÇÕES ---
+        const fone = "5588981748458"; // COLOQUE SEU WHATSAPP AQUI (DDI + DDD + NUMERO)
+        const urlApp = "SUA_URL_DO_ARQUIVO_AQUI"; // COLOQUE A URL DO SEU APK/APP AQUI
+
+        // Captura dos dados
+        const cidade = document.getElementById('cidade').value;
+        const estado = document.getElementById('estado').value;
+        const renda = document.getElementById('renda').value;
+        const faturamento = document.getElementById('faturamento').value;
+
+        // Montagem da mensagem
+        const mensagem = `Olá! Gostaria de finalizar meu cadastro Kibon:%0A%0A` +
+                         `*Cidade:* ${cidade}%0A` +
+                         `*Estado:* ${estado}%0A` +
+                         `*Renda:* ${renda}%0A` +
+                         `*Faturamento:* ${faturamento}%0A%0A` +
+                         `*Link do App:* ${urlApp}`;
+
+        // Redirecionamento
+        const wpLink = `https://api.whatsapp.com/send?phone=${fone}&text=${mensagem}`;
+        window.open(wpLink, '_blank');
+    }
+</script>
+
+</body>
+</html>
