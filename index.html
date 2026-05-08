@@ -2,69 +2,111 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parceiro Kibon - Cadastro</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Resgate seu Bônus - Cadastro Profissional</title>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .bg-kibon { background-color: #E30613; }
-        .text-kibon { color: #E30613; }
-        .border-kibon { border-color: #E30613; }
-        .input-error { border-color: #ef4444 !important; background-color: #fef2f2 !important; }
-        .btn-gradient { background: linear-gradient(180deg, #E30613 0%, #b3050f 100%); }
+        body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 20px; background-color: #f4f4f4; }
+        .container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .bonus-badge { background: #28a745; color: white; padding: 10px; text-align: center; border-radius: 5px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .error-msg { color: red; font-size: 0.9em; display: none; }
+        .btn-download { display: block; width: 100%; background: #007bff; color: white; text-align: center; padding: 15px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body>
 
-    <div class="bg-kibon py-4 px-4 shadow-md text-center">
-        <div class="bg-white inline-block px-6 py-1 rounded-full">
-            <span class="text-kibon font-black italic text-xl tracking-tighter">Kibon</span>
-        </div>
+<div class="container">
+    <div class="bonus-badge">
+        <h2>🎁 BÔNUS DE R$ 500,00 DISPONÍVEL</h2>
+        <p>Complete seu perfil profissional e baixe o APK para resgatar e escolher seu freezer.</p>
     </div>
 
-    <div class="max-w-md mx-auto mt-6 px-4 pb-12">
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-            
-            <div class="p-6 text-center border-b border-gray-100">
-                <h1 class="text-2xl font-extrabold text-gray-800">Cadastro de Parceiro</h1>
-                <p class="text-gray-500 text-sm font-medium">Preencha os dados para liberar seu bônus de <span class="text-kibon font-bold">R$ 500,00</span></p>
-            </div>
+    <form id="cadastroForm">
+        <!-- Perfil Profissional -->
+        <div class="form-group">
+            <label>Perfil Profissional:</label>
+            <select required>
+                <option value="">Selecione sua ocupação...</option>
+                <option value="varejo">Varejista / Dono de Mercado</option>
+                <option value="restaurante">Restaurante / Bar</option>
+                <option value="distribuidor">Distribuidor</option>
+                <option value="outro">Outro</option>
+            </select>
+        </div>
 
-            <form id="formCadastro" class="p-6 space-y-5">
-                
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Nome Completo</label>
-                        <input type="text" required placeholder="Digite seu nome" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all">
-                    </div>
+        <!-- Validação de Documento -->
+        <div class="form-group">
+            <label>CPF ou CNPJ:</label>
+            <input type="text" id="documento" placeholder="000.000.000-00 ou 00.000.000/0000-00" required>
+            <span id="docErro" class="error-msg">Documento inválido. Por favor, verifique os dados.</span>
+        </div>
 
-                    <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Nome do Comércio</label>
-                        <input type="text" required placeholder="Nome da sua loja" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all">
-                    </div>
+        <!-- Localização -->
+        <div class="form-group">
+            <label>Estado (UF):</label>
+            <select id="estado" required>
+                <option value="">Selecione o Estado</option>
+                <!-- Preencher via JS ou manualmente as siglas (SP, RJ, MG...) -->
+            </select>
+        </div>
 
-                    <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">CNPJ ou CPF</label>
-                        <input type="text" id="documento" required placeholder="000.000.000-00" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all">
-                        <p id="error-msg" class="hidden text-red-600 text-[10px] font-bold mt-1 uppercase">Documento Inválido!</p>
-                    </div>
+        <div class="form-group">
+            <label>Cidade:</label>
+            <select id="cidade" required disabled>
+                <option value="">Selecione a Cidade</option>
+            </select>
+        </div>
 
-                    <div>
-                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Modelo do Celular</label>
-                        <select required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-red-500 outline-none bg-white">
-                            <option value="" disabled selected>Selecione...</option>
-                            <option>Samsung</option>
-                            <option>Motorola</option>
-                            <option>Xiaomi / Redmi</option>
-                            <option>iPhone</option>
-                            <option>LG / Outros</option>
-                        </select>
-                    </div>
+        <!-- Seleção de Modelo Android -->
+        <div class="form-group">
+            <label>Seu Modelo de Dispositivo Android:</label>
+            <select required>
+                <option value="">Selecione seu modelo...</option>
+                <optgroup label="Samsung">
+                    <option>Galaxy S24 Ultra / S23 / S22</option>
+                    <option>Galaxy A54 / A34 / A14</option>
+                    <option>Galaxy M54 / M34</option>
+                </optgroup>
+                <optgroup label="Motorola">
+                    <option>Edge 40 / 30</option>
+                    <option>Moto G84 / G54 / G23</option>
+                </optgroup>
+                <optgroup label="Xiaomi">
+                    <option>Redmi Note 13 / 12</option>
+                    <option>Xiaomi 13T / 12 / POCO F5</option>
+                </optgroup>
+            </select>
+        </div>
 
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Estado (UF)</label>
-                            <select id="estado" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-red-500 outline-none bg-white text-sm">
-                                <option value="" disabled selected>UF</option>
-                                <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option
+        <p><small>* Após o download, você poderá selecionar o modelo de freezer desejado dentro do aplicativo.</small></p>
+
+        <a href="URL_DO_SEU_APK_AQUI.apk" class="btn-download" id="downloadBtn">
+            BAIXAR APK E RESGATAR R$ 500,00
+        </a>
+    </form>
+</div>
+
+<script>
+    // Exemplo simplificado de lógica para validar se o campo não está vazio 
+    // e simular a validação que você solicitou.
+    document.getElementById('documento').addEventListener('blur', function() {
+        const doc = this.value.replace(/\D/g, '');
+        const erro = document.getElementById('docErro');
+        
+        // Validação básica de tamanho para CPF ou CNPJ
+        if (doc.length !== 11 && doc.length !== 14) {
+            erro.style.display = 'block';
+            this.style.borderColor = 'red';
+        } else {
+            erro.style.display = 'none';
+            this.style.borderColor = '#ccc';
+        }
+    });
+
+    // Nota: Para carregar todos os estados e cidades, recomendo usar a API do IBGE:
+    // https://servicodados.ibge.gov.br/api/v1/localidades/estados
+</script>
+
+</body>
+</html>
