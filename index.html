@@ -3,108 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parceiro Kibon - Resgate de Bônus</title>
+    <title>Parceiro Kibon - Programa de Bônus</title>
     <style>
-        :root { 
-            --vermelho-kibon: #e31b23; 
-            --amarelo-kibon: #ffcc00; 
+        /* Cores Oficiais e Estilização */
+        :root {
+            --vermelho-kibon: #e31b23;
+            --amarelo-detalhe: #ffcc00;
+            --cinza-fundo: #f2f2f2;
             --branco: #ffffff;
-            --gradiente: linear-gradient(180deg, #e31b23 0%, #f0f0f0 40%);
         }
 
-        body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            background: var(--gradiente); 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            margin: 0; 
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(180deg, var(--vermelho-kibon) 0%, var(--cinza-fundo) 45%);
+            margin: 0;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             min-height: 100vh;
         }
 
-        /* Título Principal Fora do Card */
-        .main-title {
-            color: var(--branco);
+        /* Título de Topo */
+        .brand-header {
             text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        .main-title h1 { margin: 0; font-size: 28px; font-style: italic; text-transform: uppercase; letter-spacing: -1px; }
-        .main-title p { margin: 5px 0; font-weight: bold; font-size: 14px; opacity: 0.9; }
-
-        .card { 
-            background: white; 
-            width: 100%; 
-            max-width: 420px; 
-            border-radius: 40px; 
-            padding: 35px 25px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
-            box-sizing: border-box; 
-            position: relative;
+            color: var(--branco);
+            margin-bottom: 25px;
+            margin-top: 10px;
         }
 
-        /* Selo de Verificado */
-        .verified-badge {
-            position: absolute;
-            top: -15px;
-            right: 20px;
-            background: #007bff;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
+        .brand-header h1 {
+            font-size: 32px;
+            font-style: italic;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .brand-header p {
+            font-size: 14px;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin: 5px 0;
+            opacity: 0.9;
         }
 
-        .header-bonus { 
-            background: var(--vermelho-kibon); 
-            color: white; 
-            text-align: center; 
-            padding: 25px; 
-            border-radius: 25px; 
-            margin-bottom: 30px;
-            border: 2px solid var(--amarelo-kibon);
+        /* Container Principal (Card) */
+        .card {
+            background: var(--branco);
+            width: 100%;
+            max-width: 420px;
+            border-radius: 40px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            box-sizing: border-box;
         }
-        .header-bonus h2 { margin: 0; font-size: 26px; letter-spacing: 1px; }
-        .header-bonus p { margin: 8px 0 0; color: var(--amarelo-kibon); font-weight: 900; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
 
-        label { display: block; font-weight: bold; margin-bottom: 6px; color: #555; font-size: 12px; text-transform: uppercase; padding-left: 5px;}
-        .form-group { margin-bottom: 18px; }
-        
-        input, select { 
-            width: 100%; 
-            padding: 16px; 
-            border: 2px solid #f2f2f2; 
-            border-radius: 18px; 
-            font-size: 16px; 
-            box-sizing: border-box; 
-            outline: none; 
-            transition: 0.3s;
-            background-color: #fafafa;
+        /* Banner do Bônus */
+        .bonus-banner {
+            background: var(--vermelho-kibon);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            color: var(--branco);
+            margin-bottom: 25px;
+            border-bottom: 5px solid rgba(0,0,0,0.1);
         }
-        input:focus, select:focus { border-color: var(--vermelho-kibon); background-color: #fff; }
 
-        .row { display: flex; gap: 12px; }
-        .row div { flex: 1; }
+        .bonus-banner h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
 
-        .btn-download { 
-            display: block; 
-            width: 100%; 
-            background: var(--vermelho-kibon); 
-            color: white; 
-            text-align: center; 
-            padding: 22px; 
-            text-decoration: none; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            font-size: 20px; 
-            margin-top: 25px; 
-            box-shadow: 0 10px 20px rgba(227, 27, 35, 0.4); 
-            transition: 0.3s;
+        .bonus-banner p {
+            margin: 5px 0 0;
+            color: var(--amarelo-detalhe);
+            font-weight: 800;
+            font-size: 15px;
             text-transform: uppercase;
         }
-        .btn-download:hover { transform: scale(1.02); background: #ff1a21; }
 
-        .error-msg { color: var(--vermelho-kibon); font-size: 11px;
+        /* Formulário */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            padding-left: 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #f0f0f0;
+            border-radius: 15px;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+            background-color: #fafafa;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--vermelho-kibon);
+            background-color: #fff;
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .row div {
+            flex: 1;
+        }
+
+        /* Botão de Download Estilo Kibon */
+        .btn-action {
+            display: block;
+            width: 100%;
+            background: var(--vermelho-kibon);
+            color: var(--branco);
+            text-align: center;
+            padding: 18px;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 19px;
+            margin-top: 10px;
+            box-shadow: 0 8px 20px rgba(227, 27, 35, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .btn-action:active {
+            transform: scale(0.96);
+        }
+
+        .error-msg {
+            color: var(--vermelho-kibon);
+            font-size: 11px;
+            font-weight: bold;
+            display: none;
+            margin-top: 5px;
+            padding-left: 5px;
+        }
+
+        /* Rodapé */
+        footer {
+            margin-top: 30px;
+            color: #888;
+            font-size: 10px;
+            text-align: center;
+            line-height: 1.6;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+<div class="brand-header">
+    <h1>Kibon</h1>
+    <p>Portal do Parceiro</p>
+</div>
+
+<div class="card">
+    <div class="bonus-banner">
+        <h2>BÔNUS DE R$ 500,00</h2>
+        <p>Exclusivo para Parceiros</p>
+    </div>
+
+    <form id="kibonForm">
+        <div class="form-group">
+            <label>Perfil Profissional</label>
+            <select required>
+                <option value="">Selecione seu perfil...</option>
+                <option>Ponto de Venda (PDV)</option>
+                <option>Revendedor</option>
+                <option>Distribuidor</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>CPF ou CNPJ (Apenas Números)</label>
+            <input type="text" id="docInput" placeholder="Digite aqui..." maxlength="14" required>
+            <span id="docErro" class="error-msg">⚠️ Documento inválido. Verifique os dados.</span>
+        </div>
+
+        <div class="row form-group">
+            <div style="flex: 0.3;">
+                <label>Estado</label>
+                <select id="estado" required>
+                    <option value="">UF</option>
+                    <option>SP</option><option>RJ</option><option>MG</option>
+                    <option>BA</option><option>PR</option><option>RS</option>
+                    <option>PE</option><option>CE</option><option>SC</option>
+                </select>
+            </div>
+            <div style="flex: 0.7;">
+                <label>Renda Mensal do Comércio</label>
+                <select required>
+                    <option value="">Selecione a renda...</option>
+                    <option>Até R$ 3.000</option>
+                    <option>R$ 3.000 a R$ 8.000</option>
+                    <option>Acima de R$ 8.000</option>
+                </select>
+            </div>
