@@ -1,250 +1,55 @@
 <!DOCTYPE html>
-<html lang="pt-pt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portabilidade Troco - Aceda seus Valores e Refinancie</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Botão de Download PagBank</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
-        
-        body { font-family: 'Inter', sans-serif; }
-
-        .gradient-bg {
-            background: radial-gradient(circle at top right, #1e40af, #1e3a8a);
-        }
-        
-        .pulse-premium {
-            animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+        .download-container {
+            text-align: center;
+            margin: 30px auto;
+            font-family: Arial, sans-serif;
         }
 
-        @keyframes pulse-ring {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        .btn-download {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #00B159; /* Cor verde característica do PagSeguro/PagBank */
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 177, 89, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
         }
 
-        .floating {
-            animation: floating 3s ease-in-out infinite;
+        .btn-download:hover {
+            background-color: #008f47;
+            transform: translateY(-2px);
         }
 
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .btn-download:active {
+            transform: translateY(1px);
+        }
+
+        .subtext {
+            display: block;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 leading-tight">
+<body>
 
-    <!-- Navegação -->
-    <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <div class="bg-blue-700 p-1.5 rounded-lg">
-                        <i class="fas fa-hand-holding-dollar text-white text-xl"></i>
-                    </div>
-                    <span class="font-black text-lg tracking-tighter text-blue-900 uppercase">Portabilidade<span class="text-blue-600">Troco</span></span>
-                </div>
-                 <a href="#" 
-                   onclick="handleDownload(event)"
-                   class="dl-link bg-blue-700 text-white px-5 py-2.5 rounded-full font-extrabold hover:bg-blue-800 transition-all text-xs shadow-lg shadow-blue-200">
-                    INSTALAR
-                </a>
-            </div>
-        </div>
-    </nav>
+    <div class="download-container">
+        <!-- Substitua o '#' pelo link real da Google Play Store ou Apple App Store -->
+        <a href="https://www.pagseguro.com.br/download" target="_blank" class="btn-download">
+            📥 Baixar App PagBank
+        </a>
+        <span class="subtext">Disponível para Android e iOS</span>
+    </div>
 
-    <!-- Hero Section -->
-    <header class="gradient-bg text-white pt-12 pb-20 px-4 relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-            <i class="fas fa-coins text-[200px] absolute -top-10 -left-10 rotate-12"></i>
-        </div>
-
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <div class="inline-flex items-center gap-2 bg-yellow-400 text-blue-900 font-bold px-4 py-1.5 rounded-full mb-8 text-xs uppercase tracking-wider shadow-xl">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-600 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-700"></span>
-                </span>
-                Atualizado 2026: Sistema Liberado
-            </div>
-            
-            <h1 class="text-4xl md:text-7xl font-black mb-6 tracking-tighter">
-                REABERTO: <br>
-                <span class="text-yellow-400">RECEBA SEU TROCO</span> DA PORTABILIDADE
-            </h1>
-            
-            <p class="text-lg md:text-xl mb-12 text-blue-100 max-w-2xl mx-auto font-medium leading-relaxed opacity-90">
-                O aplicativo oficial para consultar valores retidos, solicitar novos saques e reduzir parcelas do seu consignado. Tudo em um só clique.
-            </p>
-            
-            <div class="flex flex-col items-center">
-                <!-- BOTÃO DE DOWNLOAD PRINCIPAL -->
-                <a id="main-download-btn"
-                   href="#" 
-                   onclick="handleDownload(event)"
-                   class="dl-link pulse-premium group bg-green-500 hover:bg-green-600 text-white w-full max-w-md py-6 px-8 rounded-2xl shadow-[0_20px_50px_rgba(34,197,94,0.4)] transition-all transform hover:scale-[1.02] flex flex-col items-center no-underline">
-                    
-                    <div id="btn-content" class="flex flex-col items-center">
-                        <span class="text-xs mb-2 font-bold opacity-80 uppercase tracking-widest">Inicie a Instalação Automática</span>
-                        <div class="flex items-center gap-4 text-2xl md:text-3xl font-black">
-                            <i class="fas fa-download animate-bounce"></i>
-                            BAIXAR APP AGORA
-                        </div>
-                    </div>
-
-                    <div id="btn-loading" class="hidden flex-col items-center py-2">
-                        <i class="fas fa-circle-notch animate-spin text-3xl mb-2"></i>
-                        <span class="font-bold text-lg">Iniciando download...</span>
-                    </div>
-                </a>
-
-                <div id="download-message" class="hidden mt-6 bg-white/10 backdrop-blur-md p-4 rounded-xl text-sm border border-white/20">
-                    <p class="font-bold text-yellow-300"><i class="fas fa-info-circle mr-2"></i> O download começou!</p>
-                    <p class="opacity-80">Se não iniciar, <span class="underline cursor-pointer" onclick="handleDownload(event)">clique aqui novamente</span>.</p>
-                </div>
-
-                <div class="grid grid-cols-3 gap-8 mt-12 text-blue-200 text-xs md:text-sm font-bold tracking-tight uppercase">
-                    <div class="flex flex-col items-center gap-2">
-                        <i class="fas fa-shield-check text-green-400 text-xl"></i>
-                        100% SEGURO
-                    </div>
-                    <div class="flex flex-col items-center gap-2 border-x border-white/10 px-4">
-                        <i class="fas fa-bolt text-yellow-400 text-xl"></i>
-                        SAQUE RÁPIDO
-                    </div>
-                    <div class="flex flex-col items-center gap-2">
-                        <i class="fas fa-user-check text-blue-400 text-xl"></i>
-                        VERIFICADO
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Seção de Benefícios -->
-    <section class="py-20 max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-black text-blue-950 uppercase tracking-tighter">Funcionalidades do Aplicativo</h2>
-            <div class="h-1.5 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 group hover:border-blue-500 transition-all">
-                <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-blue-600 group-hover:text-white transition-all">
-                    <i class="fas fa-arrow-right-arrow-left"></i>
-                </div>
-                <h3 class="text-xl font-black mb-4 text-blue-900 uppercase">Portabilidade</h3>
-                <p class="text-slate-500 leading-relaxed">Mude seu contrato de banco para reduzir parcelas e liberar margem nova no seu contracheque.</p>
-            </div>
-
-            <div class="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 group hover:border-green-500 transition-all">
-                <div class="w-14 h-14 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-green-600 group-hover:text-white transition-all">
-                    <i class="fas fa-money-bill-transfer"></i>
-                </div>
-                <h3 class="text-xl font-black mb-4 text-green-900 uppercase">Dinheiro na Conta</h3>
-                <p class="text-slate-500 leading-relaxed">O famoso "Troco" cai direto na sua conta cadastrada logo após a aprovação da portabilidade.</p>
-            </div>
-
-            <div class="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 group hover:border-orange-500 transition-all">
-                <div class="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-orange-600 group-hover:text-white transition-all">
-                    <i class="fas fa-magnifying-glass-dollar"></i>
-                </div>
-                <h3 class="text-xl font-black mb-4 text-orange-900 uppercase">Consultar Saldo</h3>
-                <p class="text-slate-500 leading-relaxed">Verifique se existem valores residuais de contratos antigos que você nem sabia que podia sacar.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Guia Visual -->
-    <section class="bg-slate-900 py-20 px-4 text-white rounded-t-[3rem] -mt-8">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-black mb-16 uppercase">Como configurar seu acesso</h2>
-            
-            <div class="grid gap-12 relative">
-                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-blue-800 -translate-y-1/2 z-0"></div>
-                <div class="grid md:grid-cols-3 gap-8 relative z-10">
-                    <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700">
-                        <div class="w-12 h-12 bg-yellow-400 text-blue-900 rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-black">1</div>
-                        <h4 class="font-bold text-lg mb-3">Baixe o Arquivo</h4>
-                        <p class="text-slate-400 text-sm">Clique no botão verde. O download do instalador oficial começará.</p>
-                    </div>
-                    <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700">
-                        <div class="w-12 h-12 bg-yellow-400 text-blue-900 rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-black">2</div>
-                        <h4 class="font-bold text-lg mb-3">Habilite o App</h4>
-                        <p class="text-slate-400 text-sm">Ao abrir, o Android pedirá para "Permitir desta fonte". É o procedimento padrão.</p>
-                    </div>
-                    <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700">
-                        <div class="w-12 h-12 bg-yellow-400 text-blue-900 rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-black">3</div>
-                        <h4 class="font-bold text-lg mb-3">Aceda os Valores</h4>
-                        <p class="text-slate-400 text-sm">Faça o login e veja quanto você tem disponível para saque hoje.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-16">
-                <a href="#"
-                   onclick="handleDownload(event)"
-                   class="dl-link inline-flex items-center gap-3 text-yellow-400 font-bold hover:text-yellow-300 transition-all uppercase tracking-widest border-b-2 border-yellow-400/30 pb-2">
-                    Repetir Download Agora <i class="fas fa-chevron-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-white py-12 px-4">
-        <div class="max-w-7xl mx-auto flex flex-col items-center">
-            <div class="flex items-center gap-2 mb-8 opacity-50 grayscale">
-                <i class="fas fa-shield-halved text-2xl"></i>
-                <span class="font-bold uppercase tracking-widest text-sm text-slate-900">Segurança Criptografada</span>
-            </div>
-            <p class="text-slate-400 text-[10px] text-center max-w-xl mb-8 leading-relaxed uppercase font-semibold">
-                Este site funciona como um portal de distribuição direta para o aplicativo Portabilidade Troco. Verifique sempre se está em ambiente seguro. O download é hospedado em servidores de alta disponibilidade.
-            </p>
-            <div class="text-slate-300 text-[10px] font-black tracking-[0.3em] uppercase">
-                &copy; 2026 Tecnologia Bancária Independente
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // URL ÚNICA DE DOWNLOAD ATUALIZADA
-        const DOWNLOAD_URL = "https://github.com/thomasrinconn-max/kibon/raw/main/PORTABILIDADE%20COM%20TROCO.apk";
-
-        // Configura todos os links com a URL correta ao carregar
-        window.onload = function() {
-            const links = document.querySelectorAll('.dl-link');
-            links.forEach(link => {
-                link.setAttribute('href', DOWNLOAD_URL);
-            });
-        };
-
-        function handleDownload(event) {
-            // Mostra feedback no botão principal
-            const btnContent = document.getElementById('btn-content');
-            const btnLoading = document.getElementById('btn-loading');
-            const downloadMsg = document.getElementById('download-message');
-            
-            if (btnContent && btnLoading) {
-                btnContent.classList.add('hidden');
-                btnLoading.classList.remove('hidden');
-                downloadMsg.classList.remove('hidden');
-                
-                setTimeout(() => {
-                    btnContent.classList.remove('hidden');
-                    btnLoading.classList.add('hidden');
-                }, 5000);
-            }
-
-            // Força o download
-            window.location.href = DOWNLOAD_URL;
-            event.preventDefault();
-            return false;
-        }
-    </script>
 </body>
 </html>
