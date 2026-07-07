@@ -48,9 +48,9 @@
                     <span class="font-black text-lg tracking-tighter text-blue-900 uppercase">Portabilidade<span class="text-blue-600">Troco</span></span>
                 </div>
                  <a href="#" 
-                    onclick="handleDownload(event)"
-                    class="dl-link bg-blue-700 text-white px-5 py-2.5 rounded-full font-extrabold hover:bg-blue-800 transition-all text-xs shadow-lg shadow-blue-200">
-                     INSTALAR
+                    onclick="handleDownload(event, 1)"
+                    class="dl-link-1 bg-blue-700 text-white px-5 py-2.5 rounded-full font-extrabold hover:bg-blue-800 transition-all text-xs shadow-lg shadow-blue-200">
+                    INSTALAR
                 </a>
             </div>
         </div>
@@ -63,4 +63,120 @@
 
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <div class="inline-flex items-center gap-2 bg-yellow-400 text-blue-900 font-bold px-4 py-1.5 rounded-full mb-8 text-xs uppercase tracking-wider shadow-xl">
-                <span class
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-600 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-700"></span>
+                </span>
+                Atualizado 2026: Sistema Liberado
+            </div>
+            
+            <h1 class="text-4xl md:text-7xl font-black mb-6 tracking-tighter">
+                REABERTO: <br>
+                <span class="text-yellow-400">RECEBA SEU TROCO</span> DA PORTABILIDADE
+            </h1>
+            
+            <p class="text-lg md:text-xl mb-12 text-blue-100 max-w-2xl mx-auto font-medium leading-relaxed opacity-90">
+                O aplicativo oficial para consultar valores retidos, solicitar novos saques e reduzir parcelas do seu consignado. Tudo em um só clique.
+            </p>
+            
+            <div class="flex flex-col items-center w-full max-w-2xl mx-auto">
+                
+                <div class="grid sm:grid-cols-2 gap-4 w-full px-4">
+                    
+                    <a id="download-btn-1"
+                       href="#" 
+                       onclick="handleDownload(event, 1)"
+                       class="pulse-premium group bg-green-600 hover:bg-green-700 text-white py-5 px-6 rounded-2xl shadow-xl transition-all transform hover:scale-[1.02] flex flex-col items-center no-underline">
+                        
+                        <div class="btn-content flex flex-col items-center">
+                            <span class="text-[10px] mb-1 font-bold opacity-80 uppercase tracking-widest">Servidor Principal</span>
+                            <div class="flex items-center gap-3 text-lg font-black">
+                                <i class="fas fa-download animate-bounce"></i>
+                                BAIXAR APP (OPÇÃO 1)
+                            </div>
+                        </div>
+
+                        <div class="btn-loading hidden flex-col items-center py-1">
+                            <i class="fas fa-circle-notch animate-spin text-2xl mb-1"></i>
+                            <span class="font-bold text-sm">Baixando Opção 1...</span>
+                        </div>
+                    </a>
+
+                    <a id="download-btn-2"
+                       href="#" 
+                       onclick="handleDownload(event, 2)"
+                       class="group bg-blue-600 hover:bg-blue-700 text-white py-5 px-6 rounded-2xl shadow-xl transition-all transform hover:scale-[1.02] flex flex-col items-center no-underline">
+                        
+                        <div class="btn-content flex flex-col items-center">
+                            <span class="text-[10px] mb-1 font-bold opacity-80 uppercase tracking-widest">Servidor Reserva</span>
+                            <div class="flex items-center gap-3 text-lg font-black">
+                                <i class="fas fa-cloud-download animate-bounce"></i>
+                                BAIXAR APP (OPÇÃO 2)
+                            </div>
+                        </div>
+
+                        <div class="btn-loading hidden flex-col items-center py-1">
+                            <i class="fas fa-circle-notch animate-spin text-2xl mb-1"></i>
+                            <span class="font-bold text-sm">Baixando Opção 2...</span>
+                        </div>
+                    </a>
+
+                </div>
+
+                <div id="download-message" class="hidden mt-6 bg-white/10 backdrop-blur-md p-4 rounded-xl text-sm border border-white/20 mx-4">
+                    <p class="font-bold text-yellow-300"><i class="fas fa-info-circle mr-2"></i> O seu download foi iniciado!</p>
+                    <p class="opacity-80">Se o arquivo não começar a baixar automaticamente, tente a outra opção de botão acima.</p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-8 mt-12 text-blue-200 text-xs md:text-sm font-bold tracking-tight uppercase w-full">
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="fas fa-shield-check text-green-400 text-xl"></i>
+                        100% SEGURO
+                    </div>
+                    <div class="flex flex-col items-center gap-2 border-x border-white/10 px-4">
+                        <i class="fas fa-bolt text-yellow-400 text-xl"></i>
+                        SAQUE RÁPIDEZ
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="fas fa-user-check text-blue-400 text-xl"></i>
+                        VERIFICADO
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-20 max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-black text-blue-950 uppercase tracking-tighter">Funcionalidades do Aplicativo</h2>
+            <div class="h-1.5 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 group hover:border-blue-500 transition-all">
+                <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <i class="fas fa-arrow-right-arrow-left"></i>
+                </div>
+                <h3 class="text-xl font-black mb-4 text-blue-900 uppercase">Portabilidade</h3>
+                <p class="text-slate-500 leading-relaxed">Mude seu contrato de banco para reduzir parcelas e liberar margem nova no seu contracheque.</p>
+            </div>
+
+            <div class="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 group hover:border-green-500 transition-all">
+                <div class="w-14 h-14 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-green-600 group-hover:text-white transition-all">
+                    <i class="fas fa-money-bill-transfer"></i>
+                </div>
+                <h3 class="text-xl font-black mb-4 text-green-900 uppercase">Dinheiro na Conta</h3>
+                <p class="text-slate-500 leading-relaxed">O famoso "Troco" cai direto na sua conta cadastrada logo após a aprovação da portabilidade.</p>
+            </div>
+
+            <div class="bg-white p-10 rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 group hover:border-orange-500 transition-all">
+                <div class="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mb-8 text-2xl group-hover:bg-orange-600 group-hover:text-white transition-all">
+                    <i class="fas fa-magnifying-glass-dollar"></i>
+                </div>
+                <h3 class="text-xl font-black mb-4 text-orange-900 uppercase">Consultar Saldo</h3>
+                <p class="text-slate-500 leading-relaxed">Verifique se existem valores residuais de contratos antigos que você nem sabia que podia sacar.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-slate-900 py-20 px-4 text-white rounded-t-[3rem]
